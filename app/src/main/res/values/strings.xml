@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Monitora</string>
-
+    <!--MONITORA API-->
+    <string name="base_url">https://monitora-pro.herokuapp.com/</string>
+    <string name="login">users/login</string>
+    <string name="username_body">username</string>
+    <string name="password_body">password</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -24,4 +28,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Password</string>
+    <string name="espere">Cargando ...</string>
 </resources>
