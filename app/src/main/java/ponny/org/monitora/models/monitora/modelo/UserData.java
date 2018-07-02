@@ -1,8 +1,10 @@
 package ponny.org.monitora.models.monitora.modelo;
 
-public class UserData {
+import java.io.Serializable;
+
+public class UserData  implements Serializable {
  private String _id;
- Document DocumentObject;
+ Document document;
  private boolean sesion;
  private String lastSesion = null;
  private String firstNames;
@@ -22,7 +24,7 @@ public class UserData {
  }
 
  public Document getDocument() {
-  return DocumentObject;
+  return document;
  }
 
  public boolean getSesion() {
@@ -72,7 +74,7 @@ public class UserData {
  }
 
  public void setDocument(Document documentObject) {
-  this.DocumentObject = documentObject;
+  this.document = documentObject;
  }
 
  public void setSesion(boolean sesion) {

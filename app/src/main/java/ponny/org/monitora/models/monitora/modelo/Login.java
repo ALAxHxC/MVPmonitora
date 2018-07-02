@@ -1,6 +1,8 @@
 package ponny.org.monitora.models.monitora.modelo;
 
-public class Login {
+import java.io.Serializable;
+
+public class Login implements Serializable{
  private String token;
  private float expires;
 

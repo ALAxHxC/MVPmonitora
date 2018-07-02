@@ -1,6 +1,7 @@
 package ponny.org.monitora.utils;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -23,7 +24,7 @@ public class ServicesRest {
         }
         return instance;
     }
-    public Response post(String body_send,String url) throws IOException {
+    public Response post(String body_send,String url) throws IOException, SocketTimeoutException {
 
         RequestBody body = RequestBody.create(JSON, body_send);
         Request request = new Request.Builder()

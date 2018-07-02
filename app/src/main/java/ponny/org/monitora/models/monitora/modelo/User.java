@@ -1,12 +1,14 @@
 package ponny.org.monitora.models.monitora.modelo;
 
-public class User {
+import java.io.Serializable;
+
+public class User  implements Serializable {
  private String _id;
  private String idFirebase = null;
  private String username;
  private String password;
  private String userDetails;
- private float userTypeDescription;
+ private int userTypeDescription;
  private float __v;
  UserData UserDataObject;
 
@@ -33,7 +35,7 @@ public class User {
   return userDetails;
  }
 
- public float getUserTypeDescription() {
+ public int getUserTypeDescription() {
   return userTypeDescription;
  }
 
@@ -67,10 +69,9 @@ public class User {
   this.userDetails = userDetails;
  }
 
- public void setUserTypeDescription(float userTypeDescription) {
+ public void setUserTypeDescription(int userTypeDescription) {
   this.userTypeDescription = userTypeDescription;
  }
-
  public void set__v(float __v) {
   this.__v = __v;
  }

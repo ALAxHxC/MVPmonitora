@@ -31,4 +31,10 @@
     <string name="usuario">Usuario</string>
     <string name="password">Password</string>
     <string name="espere">Cargando ...</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="error_sesion">Error en inicio de sesión</string>
+    <string name="verifique_datos">Verifique sus datos</string>
+    <string name="title_activity_paciente_main">PacienteMain</string>
+    <string name="title_activity_medico_main">MedicoMain</string>
 </resources>
