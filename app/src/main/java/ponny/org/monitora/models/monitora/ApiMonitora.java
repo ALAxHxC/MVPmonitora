@@ -3,6 +3,9 @@ package ponny.org.monitora.models.monitora;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -13,6 +16,7 @@ import java.net.SocketTimeoutException;
 
 import okhttp3.Response;
 import ponny.org.monitora.R;
+import ponny.org.monitora.models.firebase.FirebaseInstanceIDService;
 import ponny.org.monitora.models.monitora.modelo.Login;
 import ponny.org.monitora.models.monitora.modelo.LoginMonitora;
 import ponny.org.monitora.utils.ServicesRest;
@@ -32,7 +36,15 @@ public class ApiMonitora {
         return  convertBodyToObject(response.body().string());
 
     }
-
+    public boolean updateFirebase(String user) throws IOException, JSONException {
+        String url=context.getString(R.string.base_url)+
+                context.getString(R.string.update_user)+
+                user +"/"+
+                FirebaseInstanceId.getInstance().getToken();
+        Log.println(Log.ASSERT,"HTTPS",url);
+        Response response=ServicesRest.getInstance().get(url);
+       return procesarActualizacion(response.body().string());
+    }
     private JSONObject createLogin(String user, String password) throws JSONException {
         JSONObject dataJson = new JSONObject();
         dataJson.put(context.getString(R.string.username_body), user);
@@ -46,6 +58,13 @@ public class ApiMonitora {
         LoginMonitora objeto = gson.fromJson(jsonObject.toString(), LoginMonitora.class);
         Log.println(Log.ASSERT,this.getClass().getName(),objeto.toString()+"");
         return objeto;
+    }
+    private boolean procesarActualizacion(String body) throws JSONException {
+        JSONObject jsonObject=new JSONObject(body);
+        if(jsonObject.getInt("n")>0){
+            return true;
+        }
+        return  false;
     }
 
 }

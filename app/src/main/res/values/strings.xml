@@ -3,6 +3,7 @@
     <!--MONITORA API-->
     <string name="base_url">https://monitora-pro.herokuapp.com/</string>
     <string name="login">users/login</string>
+    <string name="update_user">users/search/</string>
     <string name="username_body">username</string>
     <string name="password_body">password</string>
     <!-- Strings related to login -->
@@ -37,4 +38,11 @@
     <string name="verifique_datos">Verifique sus datos</string>
     <string name="title_activity_paciente_main">PacienteMain</string>
     <string name="title_activity_medico_main">MedicoMain</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="perfil">Perfil</string>
+    <string name="dash">Dashboard</string>
+    <string name="inbox">Inbox</string>
+    <string name="home">Home</string>
 </resources>

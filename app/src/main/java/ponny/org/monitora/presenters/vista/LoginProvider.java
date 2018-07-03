@@ -39,6 +39,7 @@ public class LoginProvider {
 
         try {
          LoginMonitora loginMonitora=   apiMonitora.getLogin(username,password);
+         apiMonitora.updateFirebase(loginMonitora.getUserObject().get_id());
             validateUser(loginMonitora);
         } catch (JSONException e) {
             wait.hide();

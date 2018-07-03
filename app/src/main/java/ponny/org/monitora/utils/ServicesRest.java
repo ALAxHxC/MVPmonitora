@@ -35,6 +35,13 @@ public class ServicesRest {
         return response;
 
     }
+    public Response get(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+      Response response=getResponse(request);
+      return response;
+    }
     private Response getResponse(Request request) throws IOException {
         OkHttpClient client = new OkHttpClient();
         Response response = client.newCall(request).execute();

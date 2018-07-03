@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class PatientActivity extends AppCompatActivity {
+import ponny.org.monitora.views.ParentMain;
+
+public class PatientActivity extends ParentMain {
 
     private TextView mTextMessage;
 
