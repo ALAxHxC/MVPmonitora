@@ -4,14 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="#00000000"
     tools:context=".views.paciente.fragments.HomePacienteFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/btnoximeter" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/home_user_save"
+            style="@style/floatingButtons"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="150dp"
+            android:layout_marginEnd="130dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="150dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bascula_peso"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/oximetria_save"
+            app:srcCompat="@drawable/save" />
+
+        <ImageButton
+            android:id="@+id/glucometria_save"
+            style="@style/imageDevices"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/oximetria_save"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/tensiometro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/bascula_peso"
+            style="@style/imageDevices"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/oximetria_save"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="90dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/peso"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tensiometria_save"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/oximetria_save"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageButton
+            android:id="@+id/tensiometria_save"
+            style="@style/imageDevices"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/bascula_peso"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="90dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/glucometria"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bascula_peso"
+            app:layout_constraintTop_toBottomOf="@+id/glucometria_save"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageButton
+            android:id="@+id/oximetria_save"
+            style="@style/imageDevices"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/oximetria"
+            app:layout_constraintEnd_toStartOf="@+id/glucometria_save"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
 </FrameLayout>

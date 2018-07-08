@@ -31,12 +31,18 @@
         <item name="textAllCaps">false</item>
     </style>
     <style name="imageDevices" parent="Base.Widget.AppCompat.ImageButton">
-        <item name="android:layout_width">180sp</item>
-        <item name="android:layout_height">180sp</item>
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">180dp</item>
         <item name="android:colorBackground">@android:color/transparent</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:adjustViewBounds">true</item>
+    </style>
+    <style name="floatingButtons" parent="Widget.Design.FloatingActionButton">
+
+        <item name="backgroundTint">@color/colorPrimary
+
+        </item>
     </style>
 
 </resources>
