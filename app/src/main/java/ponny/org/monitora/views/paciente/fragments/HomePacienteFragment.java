@@ -12,7 +12,9 @@ import android.widget.ImageButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ponny.org.monitora.R;
+import ponny.org.monitora.presenters.vista.paciente.HomeProvider;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +36,7 @@ public class HomePacienteFragment extends Fragment {
     ImageButton tensimetria;
     @BindView(R.id.oximetria_save)
     ImageButton oximetria;
+    private HomeProvider homeProvider;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -81,6 +84,7 @@ public class HomePacienteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_home_paciente, container, false);
         ButterKnife.bind(this, view);
+        homeProvider=new HomeProvider(this.getActivity());
         // Inflate the layout for this fragment
         return view;
     }
@@ -90,6 +94,22 @@ public class HomePacienteFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+    @OnClick(R.id.oximetria_save)
+    public void oximetria(){
+        homeProvider.scanBLE();
+    }
+    @OnClick(R.id.glucometria_save)
+    public void glucometria(){
+        homeProvider.scanBLE();
+    }
+    @OnClick(R.id.tensiometria_save)
+    public void tensiometria(){
+        homeProvider.scanBLE();
+    }
+    @OnClick(R.id.bascula_peso)
+    public void bascula(){
+        homeProvider.scanBLE();
     }
 /*
     @Override
@@ -106,6 +126,7 @@ public class HomePacienteFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        homeProvider.apagarBLE();
         mListener = null;
     }
 

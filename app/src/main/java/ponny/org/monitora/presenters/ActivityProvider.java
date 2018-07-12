@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.Login;
 import ponny.org.monitora.models.monitora.modelo.LoginMonitora;
 import ponny.org.monitora.views.medico.MedicoMain;
+import ponny.org.monitora.views.paciente.MuestraOximetria;
 import ponny.org.monitora.views.paciente.PacienteMain;
 
 public class ActivityProvider {
@@ -29,5 +31,12 @@ public class ActivityProvider {
         Bundle bundle = new Bundle();
         bundle.putSerializable(clase.getName(), object);
         intent.putExtras(bundle);
+    }
+    public void goOximetria(String address){
+        Bundle bundle=new Bundle();
+        bundle.putString(context.getString(R.string.address),address);
+        Intent intent=new Intent(context, MuestraOximetria.class);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 }

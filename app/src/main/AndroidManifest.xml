@@ -16,7 +16,6 @@
     <!-- Es nescesario para usar el API de Bluetooth -->
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -47,23 +46,26 @@
         <activity
             android:name=".views.medico.MedicoMain"
             android:label="@string/title_activity_medico_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <service
-            android:name=".models.firebase.FirebaseMessagingService">
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".models.firebase.FirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".models.firebase.FirebaseInstanceIDService">
+        <service android:name=".models.firebase.FirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service
             android:name=".models.bluetooth.BluetoothLeService"
             android:enabled="true" />
 
+        <activity
+            android:name=".views.paciente.MuestraOximetria"
+            android:label="@string/title_activity_muestra_oximetria"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

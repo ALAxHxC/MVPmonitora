@@ -4,8 +4,14 @@
     <string name="base_url">https://monitora-pro.herokuapp.com/</string>
     <string name="login">users/login</string>
     <string name="update_user">users/search/</string>
+    <string name="muestra">traige</string>
     <string name="username_body">username</string>
     <string name="password_body">password</string>
+    <!--Bluetooth-->
+    <string name="name_device">My Oximeter</string>
+    <!--Oximetro-->
+    <string name="servicio_oximetero">cdeacb80-5235-4c07-8846-93a37ee6b86d</string>
+    <string name="caracteristica_oximetro">cdeacb81-5235-4c07-8846-93a37ee6b86d</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -45,4 +51,11 @@
     <string name="dash">Dashboard</string>
     <string name="inbox">Inbox</string>
     <string name="home">Home</string>
+    <string name="error_fatal">Error fatal</string>
+    <string name="No_bluetooth">No se encuentra bluetooth en el dispositivo</string>
+    <string name="title_activity_muestra_oximetria">MuestraOximetria</string>
+    <string name="address">Address</string>
+    <string name="ob_medicos">Obteniendo datos médicos</string>
+    <string name="pulso">Pulso</string>
+    <string name="spo2">Spo2</string>
 </resources>

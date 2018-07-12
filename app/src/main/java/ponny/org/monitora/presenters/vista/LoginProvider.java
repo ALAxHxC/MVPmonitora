@@ -24,22 +24,27 @@ public class LoginProvider {
     private DialogProvider dialogProvider;
     private ActivityProvider activityProvider;
     private Context context;
+    private static  LoginMonitora loginMonitora;
     public LoginProvider(Context context){
         this.context=context;
         dialogProvider=new DialogProvider(context);
         apiMonitora=new ApiMonitora(context);
         activityProvider=new ActivityProvider(context);
     }
+    public static LoginMonitora getLogin(){
+        return loginMonitora;
+    }
     public void initSesion(Button button, AutoCompleteTextView user, EditText pass){
         Dialog wait=dialogProvider.createDialog(R.layout.dialog_wait);
         wait.show();
+
         String username= user.getText().toString();
         String password=pass.getText().toString();
         Log.println(Log.ASSERT,"CR",username+","+password);
 
         try {
-         LoginMonitora loginMonitora=   apiMonitora.getLogin(username,password);
-         apiMonitora.updateFirebase(loginMonitora.getUserObject().get_id());
+            loginMonitora=   apiMonitora.getLogin(username,password);
+            apiMonitora.updateFirebase(loginMonitora.getUserObject().get_id());
             validateUser(loginMonitora);
         } catch (JSONException e) {
             wait.hide();

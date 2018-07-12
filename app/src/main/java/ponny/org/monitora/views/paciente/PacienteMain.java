@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ponny.org.monitora.R;
+import ponny.org.monitora.presenters.bluetooth.ControllerBLE;
+import ponny.org.monitora.presenters.vista.paciente.HomeProvider;
 import ponny.org.monitora.views.ParentMain;
 import ponny.org.monitora.views.paciente.manager.FragmentManagerPatient;
 
@@ -30,6 +32,7 @@ public class PacienteMain extends ParentMain
     TabLayout tabLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,4 +111,5 @@ public class PacienteMain extends ParentMain
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private void scanearDispositivo(final boolean enable) {}
 }

@@ -1,119 +1,116 @@
 package ponny.org.monitora.models.monitora.modelo;
 
+import android.support.annotation.Nullable;
+
 import java.io.Serializable;
 
-public class UserData  implements Serializable {
- private String _id;
- Document document;
- private boolean sesion;
- private String lastSesion = null;
- private String firstNames;
- private String lastNames;
- private String date;
- private String description;
- private String especiality;
- private String createAt;
- private String updateAt;
- private float __v;
+public class UserData implements Serializable {
+    private String _id;
+    private Document document;
+    private boolean sesion;
+    private String lastSesion = null;
+    private String firstNames;
+    private String lastNames;
+    private String date;
+    private String createAt;
+    private String updateAt;
+    private float __v;
 
 
- // Getter Methods
+    // Getter Methods
 
- public String get_id() {
-  return _id;
- }
+    public String get_id() {
+        return _id;
+    }
 
- public Document getDocument() {
-  return document;
- }
+    public Document getDocument() {
+        return document;
+    }
 
- public boolean getSesion() {
-  return sesion;
- }
+    public boolean getSesion() {
+        return sesion;
+    }
 
- public String getLastSesion() {
-  return lastSesion;
- }
+    public String getLastSesion() {
+        return lastSesion;
+    }
 
- public String getFirstNames() {
-  return firstNames;
- }
+    public String getFirstNames() {
+        return firstNames;
+    }
 
- public String getLastNames() {
-  return lastNames;
- }
+    public String getLastNames() {
+        return lastNames;
+    }
 
- public String getDate() {
-  return date;
- }
+    public String getDate() {
+        return date;
+    }
 
- public String getDescription() {
-  return description;
- }
+    public String getCreateAt() {
+        return createAt;
+    }
 
- public String getEspeciality() {
-  return especiality;
- }
+    public String getUpdateAt() {
+        return updateAt;
+    }
 
- public String getCreateAt() {
-  return createAt;
- }
+    public float get__v() {
+        return __v;
+    }
 
- public String getUpdateAt() {
-  return updateAt;
- }
+    // Setter Methods
 
- public float get__v() {
-  return __v;
- }
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
- // Setter Methods
+    public void setDocument(Document documentObject) {
+        this.document = documentObject;
+    }
 
- public void set_id(String _id) {
-  this._id = _id;
- }
+    public void setSesion(boolean sesion) {
+        this.sesion = sesion;
+    }
 
- public void setDocument(Document documentObject) {
-  this.document = documentObject;
- }
+    public void setLastSesion(String lastSesion) {
+        this.lastSesion = lastSesion;
+    }
 
- public void setSesion(boolean sesion) {
-  this.sesion = sesion;
- }
+    public void setFirstNames(String firstNames) {
+        this.firstNames = firstNames;
+    }
 
- public void setLastSesion(String lastSesion) {
-  this.lastSesion = lastSesion;
- }
+    public void setLastNames(String lastNames) {
+        this.lastNames = lastNames;
+    }
 
- public void setFirstNames(String firstNames) {
-  this.firstNames = firstNames;
- }
+    public void setDate(String date) {
+        this.date = date;
+    }
 
- public void setLastNames(String lastNames) {
-  this.lastNames = lastNames;
- }
 
- public void setDate(String date) {
-  this.date = date;
- }
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
 
- public void setDescription(String description) {
-  this.description = description;
- }
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
+    }
 
- public void setEspeciality(String especiality) {
-  this.especiality = especiality;
- }
+    public boolean isSesion() {
+        return sesion;
+    }
 
- public void setCreateAt(String createAt) {
-  this.createAt = createAt;
- }
 
- public void setUpdateAt(String updateAt) {
-  this.updateAt = updateAt;
- }
+    public void set__v(float __v) {
+        this.__v = __v;
+    }
 
- public void set__v(float __v) {
-  this.__v = __v;
- }
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "_id='" + _id + '\'' +
+                '}';
+    }
 }

@@ -19,6 +19,10 @@ import ponny.org.monitora.R;
 import ponny.org.monitora.models.firebase.FirebaseInstanceIDService;
 import ponny.org.monitora.models.monitora.modelo.Login;
 import ponny.org.monitora.models.monitora.modelo.LoginMonitora;
+import ponny.org.monitora.models.monitora.modelo.UserData;
+import ponny.org.monitora.models.monitora.modelo.UserDataMedico;
+import ponny.org.monitora.models.monitora.modelo.UserDataPaciente;
+import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
 import ponny.org.monitora.utils.ServicesRest;
 
 public class ApiMonitora {
@@ -45,6 +49,9 @@ public class ApiMonitora {
         Response response=ServicesRest.getInstance().get(url);
        return procesarActualizacion(response.body().string());
     }
+    public boolean sendMuestra(Muestra muestra){
+        return false;
+    }
     private JSONObject createLogin(String user, String password) throws JSONException {
         JSONObject dataJson = new JSONObject();
         dataJson.put(context.getString(R.string.username_body), user);
@@ -56,7 +63,10 @@ public class ApiMonitora {
         Gson gson = new Gson();
         JSONObject jsonObject = new JSONObject(body);
         LoginMonitora objeto = gson.fromJson(jsonObject.toString(), LoginMonitora.class);
-        Log.println(Log.ASSERT,this.getClass().getName(),objeto.toString()+"");
+
+        UserData userData=getUserData(objeto.getUserObject().getUserTypeDescription(),jsonObject.getJSONObject("user").getJSONObject("userData"));
+        objeto.getUserObject().setUserData(userData);
+        Log.println(Log.ASSERT,this.getClass().getName(),userData.toString());
         return objeto;
     }
     private boolean procesarActualizacion(String body) throws JSONException {
@@ -66,5 +76,21 @@ public class ApiMonitora {
         }
         return  false;
     }
+    private UserData  getUserData(int userTypeDescription,JSONObject userData){
+        Gson gson = new Gson();
+        UserData userDataObj=null;
+        switch (userTypeDescription){
+            case 2:
+                userDataObj=gson.fromJson(userData.toString(), UserDataPaciente.class);
+                break;
+            case 3:
+                userDataObj=gson.fromJson(userData.toString(), UserDataMedico.class);
+             break;
+
+        }
+        return userDataObj;
+
+    }
+
 
 }

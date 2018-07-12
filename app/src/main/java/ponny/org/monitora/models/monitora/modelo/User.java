@@ -79,4 +79,14 @@ public class User  implements Serializable {
  public void setUserData(UserData userDataObject) {
   this.UserDataObject = userDataObject;
  }
+
+ @Override
+ public String toString() {
+  return "User{" +
+          "_id='" + _id + '\'' +
+          ", idFirebase='" + idFirebase + '\'' +
+          ", username='" + username + '\'' +
+          ", password='" + password + '\'' +
+          '}';
+ }
 }

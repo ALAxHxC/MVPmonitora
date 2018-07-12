@@ -41,6 +41,7 @@
         <ImageButton
             android:id="@+id/bascula_peso"
             style="@style/imageDevices"
+            android:layout_height="176dp"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/oximetria_save"
             android:layout_marginEnd="8dp"
