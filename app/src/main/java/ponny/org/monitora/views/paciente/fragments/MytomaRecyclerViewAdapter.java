@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ponny.org.monitora.R;
+import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
+import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
 import ponny.org.monitora.views.paciente.fragments.TomaFragment.OnListFragmentInteractionListener;
 import ponny.org.monitora.views.paciente.fragments.dummy.DummyContent.DummyItem;
 
@@ -19,10 +21,9 @@ import java.util.List;
  */
 public class MytomaRecyclerViewAdapter extends RecyclerView.Adapter<MytomaRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Muestra> mValues;
     private final OnListFragmentInteractionListener mListener;
-
-    public MytomaRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MytomaRecyclerViewAdapter(List<Muestra> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -31,14 +32,15 @@ public class MytomaRecyclerViewAdapter extends RecyclerView.Adapter<MytomaRecycl
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_toma, parent, false);
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).getData().getOximeter().getPulse()+"");
+        holder.mContentView.setText(mValues.get(position).getData().getOximeter().getSpo2()+"");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +63,7 @@ public class MytomaRecyclerViewAdapter extends RecyclerView.Adapter<MytomaRecycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public Muestra mItem;
 
         public ViewHolder(View view) {
             super(view);

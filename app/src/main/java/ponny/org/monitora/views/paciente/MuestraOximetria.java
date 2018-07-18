@@ -3,7 +3,6 @@ package ponny.org.monitora.views.paciente;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,8 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ponny.org.monitora.R;
 import ponny.org.monitora.models.bluetooth.BluetoothLeService;
-import ponny.org.monitora.presenters.MuestraProvider;
-import ponny.org.monitora.presenters.bluetooth.ControllerBLE;
+import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
 
 public class MuestraOximetria extends AppCompatActivity {
     @BindView(R.id.txt_pulso_value)
@@ -56,8 +54,6 @@ public class MuestraOximetria extends AppCompatActivity {
     private void initService(){
         try {
             Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-          //  ServiceConnection serviceConnection=
-          //Log.println(Log.ASSERT,"BLE",serviceConnection.toString());
             bindService(gattServiceIntent,muestraProvider.createServiceBLE(mac, this), BIND_AUTO_CREATE);
         }catch (Exception ex){
             ex.printStackTrace();
@@ -84,7 +80,8 @@ public class MuestraOximetria extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-
+        unbindService(muestraProvider.getServiceConnection());
+        muestraProvider.volverAlInicio();
     }
 
     /**

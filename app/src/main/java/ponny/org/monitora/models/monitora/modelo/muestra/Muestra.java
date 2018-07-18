@@ -25,12 +25,16 @@ public class Muestra implements Serializable
     private Notify notify;
 
     public Muestra() {
+
+        this.data=new Data();
+
     }
 
     public Muestra(String idPatient,String idMedic) {
         this.idPatient = idPatient;
         this.idMedic=idMedic;
         this.data=new Data();
+        this.notify=new  Notify();
     }
 
     public Muestra(String idPatient, String idMedic, String description, Data data, Notify notify) {
@@ -79,6 +83,10 @@ public class Muestra implements Serializable
 
     public void setNotify(Notify notify) {
         this.notify = notify;
+    }
+
+    public static boolean possibleSend(Data data){
+        return (data.getOximeter().getSpo2()<100 && data.getOximeter().getSpo2()>0);
     }
 
 }

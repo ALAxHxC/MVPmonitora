@@ -6,11 +6,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import ponny.org.monitora.R;
+import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
+import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
 import ponny.org.monitora.views.paciente.fragments.dummy.DummyContent;
 import ponny.org.monitora.views.paciente.fragments.dummy.DummyContent.DummyItem;
 
@@ -27,6 +32,8 @@ public class TomaFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private MuestraProvider muestraProvider;
+    private List<Muestra> muestras;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -58,17 +65,19 @@ public class TomaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_toma_list, container, false);
-
+        muestraProvider=new MuestraProvider(this.getActivity());
+        muestras=muestraProvider.getMuestras();
+      //  Log.println(Log.ASSERT,"API",muestras.toString());
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
+            if (muestras.size() <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MytomaRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MytomaRecyclerViewAdapter(muestras, mListener));
         }
         return view;
     }
@@ -103,6 +112,6 @@ public class TomaFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Muestra item);
     }
 }

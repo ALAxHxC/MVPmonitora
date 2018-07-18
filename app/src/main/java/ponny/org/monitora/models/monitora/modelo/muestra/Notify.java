@@ -14,7 +14,10 @@ public class Notify implements Serializable
     @SerializedName("description")
     @Expose
     private String description;
-
+    public Notify(){
+        this.subject="Envio";
+        this.description="Envio";
+    }
     public Notify(String subject, String description) {
         this.subject = subject;
         this.description = description;

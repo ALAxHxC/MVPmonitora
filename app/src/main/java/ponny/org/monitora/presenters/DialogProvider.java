@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import ponny.org.monitora.R;
 
@@ -21,9 +22,8 @@ public class DialogProvider {
         Dialog dialogo = new Dialog(context, R.style.AlertDialogTheme);
         dialogo.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogo.setContentView(r);
-        Window window = dialogo.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setGravity(Gravity.CENTER);
+        dialogo.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialogo.getWindow().setGravity(Gravity.CENTER);
         return dialogo;
     }
     public AlertDialog createDialogError(int title,int mensaje){
@@ -47,6 +47,7 @@ public class DialogProvider {
         alertDialog.show();
         return  alertDialog;
     }
+
     public void finshApp(int rtitle, int rbody) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -65,6 +66,9 @@ public class DialogProvider {
         builder.create();
         builder.show();
 
+    }
+    public void showToast(int r){
+        Toast.makeText(context,r,Toast.LENGTH_LONG).show();
     }
     public void showSnack(int r){
         //Snackbar.make()

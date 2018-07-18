@@ -25,6 +25,7 @@ public class Data implements Serializable
         this.oximeter=new Oximeter(0,0,0);
         this.glucose=new Glucose(0);
         this.blodpressure=new Blodpressure(0,0,0);
+        this.weigth=0;
     }
     public Data(Oximeter oximeter, Glucose glucose, Integer weigth, Blodpressure blodpressure) {
         this.oximeter = oximeter;

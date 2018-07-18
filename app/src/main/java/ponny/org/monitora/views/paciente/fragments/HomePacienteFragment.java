@@ -1,20 +1,22 @@
 package ponny.org.monitora.views.paciente.fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ponny.org.monitora.R;
-import ponny.org.monitora.presenters.vista.paciente.HomeProvider;
+import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
+import ponny.org.monitora.presenters.vista.paciente.HomeProviderPaciente;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +38,15 @@ public class HomePacienteFragment extends Fragment {
     ImageButton tensimetria;
     @BindView(R.id.oximetria_save)
     ImageButton oximetria;
-    private HomeProvider homeProvider;
+    @BindView(R.id.txt_pulse_value)
+    TextView pulse;
+    @BindView(R.id.txt_spo2_value)
+    TextView spo2;
+    @BindView(R.id.txt_peso_value)
+    TextView peso;
+    @BindView(R.id.txt_gluco_value)
+    TextView gluco;
+    private HomeProviderPaciente homeProviderPaciente;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -82,11 +92,28 @@ public class HomePacienteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_home_paciente, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_paciente, container, false);
         ButterKnife.bind(this, view);
-        homeProvider=new HomeProvider(this.getActivity());
+        homeProviderPaciente = new HomeProviderPaciente(this.getActivity());
+        loadDataMuestras();
         // Inflate the layout for this fragment
         return view;
+    }
+    @OnClick(R.id.home_user_save)
+    public void subirMuestra(){
+        homeProviderPaciente.subirMuestra();
+    }
+
+    public void loadDataMuestras() {
+        try {
+            pulse.setText(MuestraProvider.getMuestra().getData().getOximeter().getPulse() + "");
+            spo2.setText(MuestraProvider.getMuestra().getData().getOximeter().getSpo2() + "");
+            peso.setText(MuestraProvider.getMuestra().getData().getWeigth() + "");
+            gluco.setText(MuestraProvider.getMuestra().getData().getGlucose().getGluco() + "");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.println(Log.ASSERT, "BE", ex.getMessage());
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -95,21 +122,25 @@ public class HomePacienteFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
     @OnClick(R.id.oximetria_save)
-    public void oximetria(){
-        homeProvider.scanBLE();
+    public void oximetria() {
+        homeProviderPaciente.scanBLE();
     }
+
     @OnClick(R.id.glucometria_save)
-    public void glucometria(){
-        homeProvider.scanBLE();
+    public void glucometria() {
+        homeProviderPaciente.scanBLE();
     }
+
     @OnClick(R.id.tensiometria_save)
-    public void tensiometria(){
-        homeProvider.scanBLE();
+    public void tensiometria() {
+        homeProviderPaciente.scanBLE();
     }
+
     @OnClick(R.id.bascula_peso)
-    public void bascula(){
-        homeProvider.scanBLE();
+    public void bascula() {
+        homeProviderPaciente.scanBLE();
     }
 /*
     @Override
@@ -126,7 +157,7 @@ public class HomePacienteFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        homeProvider.apagarBLE();
+        homeProviderPaciente.apagarBLE();
         mListener = null;
     }
 

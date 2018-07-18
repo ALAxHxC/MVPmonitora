@@ -12,15 +12,14 @@ import org.json.JSONException;
 import java.io.IOException;
 
 import ponny.org.monitora.R;
-import ponny.org.monitora.models.monitora.ApiMonitora;
-import ponny.org.monitora.models.monitora.modelo.Login;
+import ponny.org.monitora.models.monitora.servicios.ApiMonitora;
 import ponny.org.monitora.models.monitora.modelo.LoginMonitora;
+import ponny.org.monitora.models.monitora.servicios.ApiMonitoraLogin;
 import ponny.org.monitora.presenters.ActivityProvider;
 import ponny.org.monitora.presenters.DialogProvider;
-import ponny.org.monitora.utils.CipherMonitora;
 
 public class LoginProvider {
-    private ApiMonitora apiMonitora;
+    private ApiMonitoraLogin apiMonitora;
     private DialogProvider dialogProvider;
     private ActivityProvider activityProvider;
     private Context context;
@@ -28,7 +27,7 @@ public class LoginProvider {
     public LoginProvider(Context context){
         this.context=context;
         dialogProvider=new DialogProvider(context);
-        apiMonitora=new ApiMonitora(context);
+        apiMonitora=new ApiMonitoraLogin(context);
         activityProvider=new ActivityProvider(context);
     }
     public static LoginMonitora getLogin(){
