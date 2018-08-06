@@ -1,18 +1,17 @@
-package ponny.org.monitora.views.paciente.manager;
+package ponny.org.monitora.views.medico.fragments;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import ponny.org.monitora.R;
 import ponny.org.monitora.views.paciente.fragments.HomePacienteFragment;
-import ponny.org.monitora.views.paciente.fragments.InboxFragmentPatient;
-import ponny.org.monitora.views.paciente.fragments.TomaFragment;
 
-public class FragmentManagerPatient extends FragmentPagerAdapter {
+public class FragmentManagerMedic extends FragmentPagerAdapter {
     private Context context;
 
-    public FragmentManagerPatient(android.support.v4.app.FragmentManager fm, Context context) {
+    public FragmentManagerMedic(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }
@@ -21,16 +20,15 @@ public class FragmentManagerPatient extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new HomePacienteFragment();
+                return new PatientFragment();
             case 1:
-                return new TomaFragment();
+                return  new ActivityFragment();
             case 2:
-                return new InboxFragmentPatient();
+                return new MessagesFragment();
             default:
-                return new InboxFragmentPatient();
+                return new PatientFragment();
             //  return new RegistrosPacienteFragment();
         }
-
     }
 
     @Override
@@ -50,12 +48,12 @@ public class FragmentManagerPatient extends FragmentPagerAdapter {
                 //   drawable = context.getResources().getDrawable(R.drawable.home);
                 break;
             case 1:
-                //    drawable = context.getResources().getDrawable(R.drawable.home);
-                title = context.getString(R.string.dash);
+                title = context.getString(R.string.activity);
+                //   drawable = context.getResources().getDrawable(R.drawable.home);
                 break;
             case 2:
-                //     drawable = context.getResources().getDrawable(R.drawable.home);
-                title = context.getString(R.string.inbox);
+                title = context.getString(R.string.messages);
+                //   drawable = context.getResources().getDrawable(R.drawable.home);
                 break;
             default:
                 //  drawable = context.getResources().getDrawable(R.drawable.home);
@@ -65,5 +63,4 @@ public class FragmentManagerPatient extends FragmentPagerAdapter {
         return title;
 
     }
-
 }

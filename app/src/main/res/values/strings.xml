@@ -4,7 +4,7 @@
     <string name="base_url">https://monitora-pro.herokuapp.com/</string>
     <string name="login">users/login</string>
     <string name="update_user">users/search/</string>
-    <string name="muestra">traige</string>
+    <string name="muestra">traige/</string>
     <string name="username_body">username</string>
     <string name="password_body">password</string>
     <!--Bluetooth-->
@@ -58,4 +58,15 @@
     <string name="ob_medicos">Obteniendo datos médicos</string>
     <string name="pulso">Pulso</string>
     <string name="spo2">Spo2</string>
+    <string name="value_0">0</string>
+    <string name="Peso">Peso</string>
+    <string name="gluco">Gluco</string>
+    <string name="anotaciones">Anotaciones</string>
+    <string name="notas">¿Como te sientes?</string>
+    <string name="no_hay_datos">No hay registros</string>
+    <string name="registro_guardado">¡Envíado!</string>
+    <string name="registro_no_guardado">Envío fallido</string>
+    <string name="Fecha">Fecha</string>
+    <string name="activity">Activity</string>
+    <string name="messages">Mensajes</string>
 </resources>

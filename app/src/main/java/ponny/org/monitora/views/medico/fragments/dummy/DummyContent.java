@@ -1,4 +1,4 @@
-package ponny.org.monitora.views.paciente.fragments.dummy;
+package ponny.org.monitora.views.medico.fragments.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

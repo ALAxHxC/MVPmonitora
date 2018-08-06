@@ -2,20 +2,31 @@ package ponny.org.monitora.views.medico;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ponny.org.monitora.R;
 import ponny.org.monitora.views.ParentMain;
+import ponny.org.monitora.views.medico.fragments.FragmentManagerMedic;
+import ponny.org.monitora.views.paciente.manager.FragmentManagerPatient;
 
 public class MedicoMain extends ParentMain
         implements NavigationView.OnNavigationItemSelectedListener {
-    private static final int CONTENT_VIEW_ID = 10101010;
+    @BindView(R.id.viewpager)
+    ViewPager viewPager;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,32 +34,22 @@ public class MedicoMain extends ParentMain
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        FragmentManagerMedic fragmentManagerPatient = new FragmentManagerMedic(getSupportFragmentManager(), this);
+        viewPager.setAdapter(fragmentManagerPatient);
+        tabLayout.setupWithViewPager(viewPager);
+        setSupportActionBar(toolbar);
 
-       /* FragmentManager fragmentManager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager
-                .beginTransaction();
-        fragmentTransaction.add(R.id.placerholder,
-                new RegistrosPacienteFragment()).addToBackStack(null).commit();*/
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

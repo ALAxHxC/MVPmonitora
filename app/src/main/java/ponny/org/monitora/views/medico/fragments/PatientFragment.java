@@ -1,4 +1,4 @@
-package ponny.org.monitora.views.paciente.fragments;
+package ponny.org.monitora.views.medico.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,43 +6,39 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import ponny.org.monitora.R;
-import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
-import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
+import ponny.org.monitora.views.medico.fragments.dummy.DummyContent;
+import ponny.org.monitora.views.medico.fragments.dummy.DummyContent.DummyItem;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class TomaFragment extends Fragment {
+public class PatientFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    private MuestraProvider muestraProvider;
-    private List<Muestra> muestras;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public TomaFragment() {
+    public PatientFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static TomaFragment newInstance(int columnCount) {
-        TomaFragment fragment = new TomaFragment();
+    public static PatientFragment newInstance(int columnCount) {
+        PatientFragment fragment = new PatientFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -61,20 +57,18 @@ public class TomaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_toma_list, container, false);
-        muestraProvider=new MuestraProvider(this.getActivity());
-        muestras=muestraProvider.getMuestras();
-      //  Log.println(Log.ASSERT,"API",muestras.toString());
+        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (muestras.size() <= 1) {
+            if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MytomaRecyclerViewAdapter(muestras, mListener));
+            recyclerView.setAdapter(new PatientsRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
     }
@@ -89,8 +83,8 @@ public class TomaFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
         }
-    }*/
-
+    }
+*/
     @Override
     public void onDetach() {
         super.onDetach();
@@ -109,6 +103,6 @@ public class TomaFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(Muestra item);
+        void onListFragmentInteraction(DummyItem item);
     }
 }

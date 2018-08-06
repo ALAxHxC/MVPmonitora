@@ -23,6 +23,12 @@ public class Muestra implements Serializable
     @SerializedName("notify")
     @Expose
     private Notify notify;
+    @SerializedName("createAt")
+    @Expose
+    private String createAt;
+    @SerializedName("updateAt")
+    @Expose
+    private String updateAt;
 
     public Muestra() {
 
@@ -89,4 +95,19 @@ public class Muestra implements Serializable
         return (data.getOximeter().getSpo2()<100 && data.getOximeter().getSpo2()>0);
     }
 
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(String updateAt) {
+        this.updateAt = updateAt;
+    }
 }

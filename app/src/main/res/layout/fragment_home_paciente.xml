@@ -81,8 +81,138 @@
             android:scaleType="fitCenter"
             android:src="@drawable/oximetria"
             app:layout_constraintEnd_toStartOf="@+id/glucometria_save"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_pulse"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/pulso"
+            android:textAppearance="@style/MyCustomTextAppearance"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintEnd_toStartOf="@+id/txt_pulse_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/oximetria_save"
+            app:layout_constraintVertical_bias="0.026" />
+
+        <TextView
+            android:id="@+id/txt_pulse_value"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/value_0"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/MyCustomTextAppearance"
+            app:layout_constraintBottom_toTopOf="@+id/txt_spo2_value"
+            app:layout_constraintEnd_toStartOf="@+id/home_user_save"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toEndOf="@+id/txt_pulse"
+            app:layout_constraintTop_toBottomOf="@+id/oximetria_save"
+            app:layout_constraintVertical_bias="0.85" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/spo2"
+            android:textAppearance="@style/MyCustomTextAppearance"
+            app:layout_constraintBottom_toTopOf="@+id/bascula_peso"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/oximetria_save"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/txt_spo2_value"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/value_0"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/MyCustomTextAppearance"
+            app:layout_constraintBottom_toTopOf="@+id/bascula_peso"
+            app:layout_constraintEnd_toEndOf="@+id/bascula_peso"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/oximetria_save"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/txt_peso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="57dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/Peso"
+            android:textAppearance="@style/MyCustomTextAppearance"
+            app:layout_constraintBottom_toTopOf="@+id/txt_gluco"
+            app:layout_constraintEnd_toStartOf="@+id/txt_peso_value"
+            app:layout_constraintStart_toEndOf="@+id/home_user_save"
+            app:layout_constraintTop_toBottomOf="@+id/glucometria_save"
+            app:layout_constraintVertical_bias="0.08" />
+
+        <TextView
+            android:id="@+id/txt_gluco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/gluco"
+            android:textAppearance="@style/MyCustomTextAppearance"
+            app:layout_constraintBottom_toTopOf="@+id/tensiometria_save"
+            app:layout_constraintEnd_toStartOf="@+id/txt_gluco_value"
+            app:layout_constraintStart_toEndOf="@+id/home_user_save"
+            app:layout_constraintTop_toBottomOf="@+id/glucometria_save"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/txt_peso_value"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/value_0"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/MyCustomTextAppearance"
+            app:layout_constraintBottom_toBottomOf="@+id/home_user_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.636"
+            app:layout_constraintStart_toEndOf="@+id/txt_peso"
+            app:layout_constraintTop_toBottomOf="@+id/glucometria_save"
+            app:layout_constraintVertical_bias="0.023" />
+
+        <TextView
+            android:id="@+id/txt_gluco_value"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/value_0"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/MyCustomTextAppearance"
+            app:layout_constraintBottom_toTopOf="@+id/tensiometria_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/txt_gluco"
+            app:layout_constraintTop_toBottomOf="@+id/txt_peso_value"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </android.support.constraint.ConstraintLayout>

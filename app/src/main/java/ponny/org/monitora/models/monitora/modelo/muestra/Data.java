@@ -21,6 +21,7 @@ public class Data implements Serializable
     @Expose
     private Blodpressure blodpressure;
 
+
     public Data(){
         this.oximeter=new Oximeter(0,0,0);
         this.glucose=new Glucose(0);
