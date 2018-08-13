@@ -1,4 +1,4 @@
-package ponny.org.monitora.views.medico.fragments;
+package ponny.org.monitora.views.medico.fragments.pacientes;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,88 +10,95 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+
 import ponny.org.monitora.R;
-import ponny.org.monitora.models.monitora.modelo.pacientes.ListPatients;
-import ponny.org.monitora.presenters.ActivityProvider;
-import ponny.org.monitora.presenters.listeners.FragmentPatientListener;
-import ponny.org.monitora.presenters.vista.LoginProvider;
-import ponny.org.monitora.presenters.vista.medic.MedicHomeProvider;
+import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
+import ponny.org.monitora.views.common.listas.MytomaRecyclerViewAdapter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
+ * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class PatientFragment extends Fragment {
+public class TomaFragmentFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 1;
-    private FragmentPatientListener mListener;
-    private MedicHomeProvider medicHomeProvider;
-    private ListPatients listPatients;
-    private ActivityProvider activityProvider;
+    private OnListFragmentInteractionListener mListener;
+    private List<Muestra> muestras;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PatientFragment() {
+    public TomaFragmentFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static PatientFragment newInstance(int columnCount) {
-        PatientFragment fragment = new PatientFragment();
+    public static TomaFragmentFragment newInstance(List<Muestra> list) {
+        TomaFragmentFragment fragment = new TomaFragmentFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+
+        Gson gson = new Gson();
+        String muestras = gson.toJson(list.toArray());
+
+        args.putString(ARG_COLUMN_COUNT, muestras);
+
         fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityProvider=new ActivityProvider(this.getContext());
+        Gson gson = new Gson();
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            Muestra[] array  =gson.fromJson(getArguments().getString(ARG_COLUMN_COUNT),Muestra[].class);
+            muestras=new ArrayList<>();
+            muestras.addAll(Arrays.asList(array));
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        medicHomeProvider=new MedicHomeProvider(this.getActivity());
-        listPatients= medicHomeProvider.getPacientes(LoginProvider.getLogin().getUserObject().getUserData().get_id());
-        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_tomafragment_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (listPatients.getEntity().size() <= 1) {
+            if (muestras.size() <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                recyclerView.setLayoutManager(new GridLayoutManager(context, 1));
             }
-            recyclerView.setAdapter(new PatientsRecyclerViewAdapter(listPatients, mListener,activityProvider));
+            recyclerView.setAdapter(new MytomaRecyclerViewAdapter(muestras, null));
         }
         return view;
     }
 
-/*
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+    /*
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            if (context instanceof OnListFragmentInteractionListener) {
+                mListener = (OnListFragmentInteractionListener) context;
+            } else {
+                throw new RuntimeException(context.toString()
+                        + " must implement OnListFragmentInteractionListener");
+            }
         }
-    }
-*/
+    */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -108,5 +115,8 @@ public class PatientFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-
+    public interface OnListFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onListFragmentInteraction(Muestra item);
+    }
 }

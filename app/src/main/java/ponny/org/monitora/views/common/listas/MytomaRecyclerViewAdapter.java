@@ -1,4 +1,4 @@
-package ponny.org.monitora.views.paciente.fragments;
+package ponny.org.monitora.views.common.listas;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +17,7 @@ public class MytomaRecyclerViewAdapter extends RecyclerView.Adapter<MytomaRecycl
 
     private final List<Muestra> mValues;
     private final OnListFragmentInteractionListener mListener;
+
     public MytomaRecyclerViewAdapter(List<Muestra> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
@@ -33,9 +34,9 @@ public class MytomaRecyclerViewAdapter extends RecyclerView.Adapter<MytomaRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-     holder.fecha.setText(mValues.get(position).getCreateAt());
-        holder.pulso.setText(mValues.get(position).getData().getOximeter().getPulse()+"");
-        holder.spo2.setText(mValues.get(position).getData().getOximeter().getSpo2()+"");
+        holder.fecha.setText(mValues.get(position).getCreateAt());
+        holder.pulso.setText(mValues.get(position).getData().getOximeter().getPulse() + "");
+        holder.spo2.setText(mValues.get(position).getData().getOximeter().getSpo2() + "");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

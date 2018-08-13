@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,10 @@ import java.util.List;
 
 import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
+import ponny.org.monitora.presenters.vista.LoginProvider;
 import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
+import ponny.org.monitora.views.common.listas.MytomaRecyclerViewAdapter;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -63,7 +65,7 @@ public class TomaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_toma_list, container, false);
         muestraProvider=new MuestraProvider(this.getActivity());
-        muestras=muestraProvider.getMuestras();
+        muestras=muestraProvider.getMuestras(LoginProvider.getLogin().getUserObject().getUserData().get_id());
       //  Log.println(Log.ASSERT,"API",muestras.toString());
         // Set the adapter
         if (view instanceof RecyclerView) {

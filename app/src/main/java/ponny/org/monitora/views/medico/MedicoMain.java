@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ponny.org.monitora.R;
+import ponny.org.monitora.presenters.ActivityProvider;
 import ponny.org.monitora.views.ParentMain;
 import ponny.org.monitora.views.medico.fragments.FragmentManagerMedic;
 import ponny.org.monitora.views.paciente.manager.FragmentManagerPatient;
@@ -26,7 +27,6 @@ public class MedicoMain extends ParentMain
     TabLayout tabLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

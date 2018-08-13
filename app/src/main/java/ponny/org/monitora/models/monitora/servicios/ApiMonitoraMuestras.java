@@ -31,11 +31,10 @@ public class ApiMonitoraMuestras extends ApiMonitora {
        // FirebaseCrash.report(new Exception("My first Android non-fatal error"));
         return false;
     }
-    public Muestra[] getMuestras() throws IOException {
-        String url=context.getString(R.string.base_url)+context.getString(R.string.muestra)+ LoginProvider.getLogin().getUserObject().getUserData().get_id() ;
+    public Muestra[] getMuestras(String id) throws IOException {
+        String url=context.getString(R.string.base_url)+context.getString(R.string.muestra)+ id ;
         Response response=ServicesRest.getInstance().get(url);
         return procesarMuestras(response.body().string());
-
     }
     private Muestra[] procesarMuestras(String body){
             Gson gson=new Gson();

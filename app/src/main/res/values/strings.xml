@@ -4,7 +4,7 @@
     <string name="base_url">https://monitora-pro.herokuapp.com/</string>
     <string name="login">users/login</string>
     <string name="update_user">users/search/</string>
-    <string name="get_patients">patient/medic</string>
+    <string name="get_patients">patient/medic/</string>
     <string name="muestra">traige/</string>
     <string name="username_body">username</string>
     <string name="password_body">password</string>
@@ -70,4 +70,10 @@
     <string name="Fecha">Fecha</string>
     <string name="activity">Activity</string>
     <string name="messages">Mensajes</string>
+    <string name="title_activity_vista_paciente_medico">VistaPacienteMedico</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="paciente">Paciente</string>
 </resources>

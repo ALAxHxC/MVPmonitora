@@ -139,9 +139,9 @@ public class MuestraProvider {
             return muestra;
         }
     }
-    public List<Muestra> getMuestras(){
+    public List<Muestra> getMuestras(String id){
         try {
-            Muestra[] muestrasobjeto=apiMonitoraMuestras.getMuestras();
+            Muestra[] muestrasobjeto=apiMonitoraMuestras.getMuestras(id);
             List<Muestra> muestras= Arrays.asList(muestrasobjeto);
            return muestras;
         } catch (IOException e) {

@@ -1,14 +1,16 @@
 package ponny.org.monitora.presenters;
 
 import android.content.Context;
+import ponny.org.monitora.models.monitora.modelo.pacientes.Entity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 
 import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.Login;
 import ponny.org.monitora.models.monitora.modelo.LoginMonitora;
 import ponny.org.monitora.views.medico.MedicoMain;
+import ponny.org.monitora.views.medico.VistaPacienteMedico;
 import ponny.org.monitora.views.paciente.MuestraOximetria;
 import ponny.org.monitora.views.paciente.PacienteMain;
 
@@ -38,5 +40,16 @@ public class ActivityProvider {
         Intent intent=new Intent(context, MuestraOximetria.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
+    }
+    public void goVistaPaciente(Entity entity){
+        Bundle bundle=new Bundle();
+        bundle.putSerializable(context.getString(R.string.paciente),entity);
+        Intent intent=new Intent(context, VistaPacienteMedico.class);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+    public Entity getPaciente(Intent intent){
+        Entity entity=(Entity)intent.getExtras().getSerializable(context.getString(R.string.paciente));
+        return entity;
     }
 }

@@ -6,25 +6,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import ponny.org.monitora.R;
-import ponny.org.monitora.views.medico.fragments.PatientFragment.OnListFragmentInteractionListener;
+import ponny.org.monitora.models.monitora.modelo.pacientes.Entity;
+import ponny.org.monitora.models.monitora.modelo.pacientes.ListPatients;
+import ponny.org.monitora.presenters.ActivityProvider;
+import ponny.org.monitora.presenters.listeners.FragmentPatientListener;
 import ponny.org.monitora.views.medico.fragments.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link FragmentPatientListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class PatientsRecyclerViewAdapter extends RecyclerView.Adapter<PatientsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
-
-    public PatientsRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    private final ListPatients mValues;
+    private final FragmentPatientListener mListener;
+    private final ActivityProvider activityProvider;
+    public PatientsRecyclerViewAdapter(ListPatients listPatients, FragmentPatientListener listener, ActivityProvider activityProvider) {
+        mValues = listPatients;
         mListener = listener;
+        this.activityProvider=activityProvider;
     }
 
     @Override
@@ -35,44 +40,50 @@ public class PatientsRecyclerViewAdapter extends RecyclerView.Adapter<PatientsRe
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.mItem = mValues.getEntity().get(position);
+        holder.namesTxt.setText(mValues.getEntity().get(position).getFirstNames()+" "+mValues.getEntity().get(position).getLastNames());
+        holder.documentTxt.setText(mValues.getEntity().get(position).getDocument().getIdentification());
+        holder.profile.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
 
+        holder.profile.setImageResource(R.drawable.profile65);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+                activityProvider.goVistaPaciente(mValues.getEntity().get(position));
+            }
+        });
+        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mValues.getEntity().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView documentTxt;
+        public final TextView namesTxt;
+        public final CircleImageView profile;
+        public Entity mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            documentTxt = (TextView) view.findViewById(R.id.textViewCC_list);
+            namesTxt = (TextView) view.findViewById(R.id.textViewNames_list);
+            profile = (CircleImageView)view.findViewById(R.id.imageProfilePaciente);
         }
 
         @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+        public String toString()  {
+            return super.toString() + " '" + documentTxt.getText() + "'";
         }
     }
 }
