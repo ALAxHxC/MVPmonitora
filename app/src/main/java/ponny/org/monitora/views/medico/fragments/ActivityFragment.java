@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import ponny.org.monitora.R;
 import ponny.org.monitora.views.medico.fragments.dummy.DummyContent;
-import ponny.org.monitora.views.medico.fragments.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
@@ -105,6 +104,6 @@ public class ActivityFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(DummyContent.DummyItem item);
     }
 }

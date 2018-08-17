@@ -1,9 +1,8 @@
-package ponny.org.monitora.views.medico.fragments;
+package ponny.org.monitora.views.medico.fragments.pacientes;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +15,7 @@ import ponny.org.monitora.presenters.ActivityProvider;
 import ponny.org.monitora.presenters.listeners.FragmentPatientListener;
 import ponny.org.monitora.presenters.vista.LoginProvider;
 import ponny.org.monitora.presenters.vista.medic.MedicHomeProvider;
+import ponny.org.monitora.views.medico.fragments.PatientsRecyclerViewAdapter;
 
 /**
  * A fragment representing a list of Items.
@@ -27,7 +27,6 @@ public class PatientFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 1;
     private FragmentPatientListener mListener;
     private MedicHomeProvider medicHomeProvider;
     private ListPatients listPatients;
@@ -55,7 +54,7 @@ public class PatientFragment extends Fragment {
         super.onCreate(savedInstanceState);
         activityProvider=new ActivityProvider(this.getContext());
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+           // mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
@@ -72,10 +71,8 @@ public class PatientFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             if (listPatients.getEntity().size() <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new PatientsRecyclerViewAdapter(listPatients, mListener,activityProvider));
+            } else
+                recyclerView.setAdapter(new PatientsRecyclerViewAdapter(listPatients, mListener,activityProvider));
         }
         return view;
     }

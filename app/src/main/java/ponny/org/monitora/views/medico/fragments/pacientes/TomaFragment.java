@@ -26,10 +26,10 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class TomaFragmentFragment extends Fragment {
+public class TomaFragment extends Fragment {
 
     // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
+    public static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private OnListFragmentInteractionListener mListener;
     private List<Muestra> muestras;
@@ -38,13 +38,13 @@ public class TomaFragmentFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public TomaFragmentFragment() {
+    public TomaFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static TomaFragmentFragment newInstance(List<Muestra> list) {
-        TomaFragmentFragment fragment = new TomaFragmentFragment();
+    public static TomaFragment newInstance(List<Muestra> list) {
+        TomaFragment fragment = new TomaFragment();
         Bundle args = new Bundle();
 
         Gson gson = new Gson();

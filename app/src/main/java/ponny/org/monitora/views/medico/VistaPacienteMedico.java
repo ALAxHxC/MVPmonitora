@@ -25,7 +25,9 @@ import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.pacientes.Entity;
 import ponny.org.monitora.presenters.ActivityProvider;
 import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
-import ponny.org.monitora.views.medico.fragments.pacientes.TomaFragmentFragment;
+import ponny.org.monitora.views.common.graphs.PulseChart;
+import ponny.org.monitora.views.common.graphs.Spo2Chart;
+import ponny.org.monitora.views.medico.fragments.pacientes.TomaFragment;
 
 public class VistaPacienteMedico extends AppCompatActivity {
 
@@ -52,9 +54,9 @@ public class VistaPacienteMedico extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_paciente_medico);
 
-        activityProvider=new ActivityProvider(this);
-        paciente=activityProvider.getPaciente(getIntent());
-        muestraProvider =new MuestraProvider(this);
+        activityProvider = new ActivityProvider(this);
+        paciente = activityProvider.getPaciente(getIntent());
+        muestraProvider = new MuestraProvider(this);
         loadingMuestras();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,8 +83,9 @@ public class VistaPacienteMedico extends AppCompatActivity {
         });
 
     }
-    private void loadingMuestras(){
-        listaDeMuestras=muestraProvider.getMuestras(paciente.getId());
+
+    private void loadingMuestras() {
+        listaDeMuestras = muestraProvider.getMuestras(paciente.getId());
 
     }
 
@@ -157,11 +160,16 @@ public class VistaPacienteMedico extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            switch (position){
-                case 1: return  TomaFragmentFragment.newInstance(listaDeMuestras);
-                case 2:  return PlaceholderFragment.newInstance(position + 1);
-                case 3: return  PlaceholderFragment.newInstance(position + 1);
-                default: return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return TomaFragment.newInstance(listaDeMuestras);
+                case 1:
+                    return Spo2Chart.newInstance(listaDeMuestras);
+                case 2:
+                    return PulseChart.newInstance(listaDeMuestras);
+
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
             }
 
         }
