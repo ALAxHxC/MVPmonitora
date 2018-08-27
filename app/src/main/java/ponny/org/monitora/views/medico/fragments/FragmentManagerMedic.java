@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import ponny.org.monitora.R;
+import ponny.org.monitora.views.common.fragments.InboxFragmentPatient;
 import ponny.org.monitora.views.medico.fragments.pacientes.PatientFragment;
 
 public class FragmentManagerMedic extends FragmentPagerAdapter {
@@ -24,7 +25,7 @@ public class FragmentManagerMedic extends FragmentPagerAdapter {
             case 1:
                 return  new ActivityFragment();
             case 2:
-                return new MessagesFragment();
+                return new InboxFragmentPatient();
             default:
                 return new PatientFragment();
             //  return new RegistrosPacienteFragment();

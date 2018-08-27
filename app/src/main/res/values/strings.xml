@@ -8,6 +8,11 @@
     <string name="muestra">traige/</string>
     <string name="username_body">username</string>
     <string name="password_body">password</string>
+    <string name="get_messages_patient">messages/patient/</string>
+    <string name="get_messages_medic">messages/medic/</string>
+    <string name="get_read_message_patient">messages/view/patient/</string>
+    <string name="get_read_message_medic">messages/view/medic/</string>
+    <string name="post_message">messages/</string>
     <!--Bluetooth-->
     <string name="name_device">My Oximeter</string>
     <!--Oximetro-->
@@ -76,4 +81,6 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="paciente">Paciente</string>
+    <string name="de">de</string>
+    <string name="Asunto">Asunto</string>
 </resources>

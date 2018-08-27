@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import ponny.org.monitora.R;
 import ponny.org.monitora.views.paciente.fragments.HomePacienteFragment;
-import ponny.org.monitora.views.paciente.fragments.InboxFragmentPatient;
+import ponny.org.monitora.views.common.fragments.InboxFragmentPatient;
 import ponny.org.monitora.views.paciente.fragments.TomaFragment;
 
 public class FragmentManagerPatient extends FragmentPagerAdapter {
