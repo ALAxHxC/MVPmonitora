@@ -83,4 +83,8 @@
     <string name="paciente">Paciente</string>
     <string name="de">de</string>
     <string name="Asunto">Asunto</string>
+    <string name="asunto">Asunto</string>
+    <string name="descripccion">¿Que le quieres decir a tu paciente?</string>
+    <string name="mensaje_no_enviado">No pudimos enviar tu mensaje</string>
+    <string name="messages_enviado">Mensaje Enviado</string>
 </resources>

@@ -2,7 +2,6 @@ package ponny.org.monitora.views.medico;
 
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -25,6 +24,7 @@ import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.pacientes.Entity;
 import ponny.org.monitora.presenters.ActivityProvider;
 import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
+import ponny.org.monitora.views.medico.dialogs.MessageDialogFragment;
 import ponny.org.monitora.views.common.graphs.PulseChart;
 import ponny.org.monitora.views.common.graphs.Spo2Chart;
 import ponny.org.monitora.views.medico.fragments.pacientes.TomaFragment;
@@ -77,8 +77,12 @@ public class VistaPacienteMedico extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                FragmentManager fm = getSupportFragmentManager();
+                MessageDialogFragment messageDialogFragment = MessageDialogFragment.newInstance(paciente.getId());
+                messageDialogFragment.show(fm, "fragment_edit_name");
+
+              /*  Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 

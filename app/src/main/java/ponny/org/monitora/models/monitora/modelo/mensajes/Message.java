@@ -46,6 +46,11 @@ public class Message implements Serializable
     private Integer v;
     private final static long serialVersionUID = -9125165768415125138L;
 
+    public Message(String idMedic, String idPatient) {
+        this.idMedic = idMedic;
+        this.idPatient = idPatient;
+    }
+
     public Object getResponse() {
         return response;
     }

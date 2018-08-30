@@ -17,6 +17,7 @@ public class MedicHomeProvider {
     private Context context;
     private ActivityProvider activityProvider;
     private ApiMonitoraPacientes apiMonitoraPacientes;
+    public static ListPatients listPatients;
     public MedicHomeProvider(Activity activity) {
         this.context = activity;
         this.activityProvider = new ActivityProvider(activity);
@@ -24,9 +25,9 @@ public class MedicHomeProvider {
     }
     public ListPatients getPacientes(String id){
         try {
-            ListPatients patients=apiMonitoraPacientes.getPatients(id);
-            Log.println(Log.ASSERT,"API",patients.toString());
-            return patients;
+            listPatients=apiMonitoraPacientes.getPatients(id);
+            Log.println(Log.ASSERT,"API",listPatients.toString());
+            return listPatients;
         } catch (IOException e) {
             Log.println(Log.ASSERT,"API",e.getMessage());
             e.printStackTrace();
