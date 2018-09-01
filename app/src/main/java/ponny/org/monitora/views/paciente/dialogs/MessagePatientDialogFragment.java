@@ -1,11 +1,9 @@
-package ponny.org.monitora.views.medico.dialogs;
+package ponny.org.monitora.views.paciente.dialogs;
 
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +19,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ponny.org.monitora.R;
 import ponny.org.monitora.presenters.DialogProvider;
-import ponny.org.monitora.presenters.vista.LoginProvider;
 import ponny.org.monitora.presenters.vista.medic.MessageProvider;
 
 
-public class MessageDialogFragment extends DialogFragment {
+public class MessagePatientDialogFragment extends DialogFragment {
     @BindView(R.id.txt_asunto)
     TextView asunto;
     @BindView(R.id.txt_descripccion)
@@ -36,12 +33,12 @@ public class MessageDialogFragment extends DialogFragment {
     private DialogProvider dialogProvider;
     private String patient;
 
-    public MessageDialogFragment() {
+    public MessagePatientDialogFragment() {
 
     }
 
-    public static MessageDialogFragment newInstance(String title) {
-        MessageDialogFragment frag = new MessageDialogFragment();
+    public static ponny.org.monitora.views.medico.dialogs.MessageDialogFragment newInstance(String title) {
+        ponny.org.monitora.views.medico.dialogs.MessageDialogFragment frag = new ponny.org.monitora.views.medico.dialogs.MessageDialogFragment();
         Bundle args = new Bundle();
         args.putString("ID", title);
         frag.setArguments(args);
@@ -55,24 +52,23 @@ public class MessageDialogFragment extends DialogFragment {
         ButterKnife.bind(this,view);
         dialogProvider=new DialogProvider(this.getContext());
         messageProvider=new MessageProvider(this.getContext());
-        patient= LoginProvider.getLogin().getUserObject().getUserData().get_id();
         return view;
     }
     @OnClick(R.id.btn_send_message)
     public void sendMessage(){
-        Log.println(Log.ASSERT,"API","click");
         try {
-            boolean response=messageProvider.sendMessageAsPatient(asunto,descripccion);
+            boolean response=messageProvider.sendMessageAsMedic(asunto,descripccion,patient);
             if(response)
                 dialogProvider.showToast(R.string.messages_enviado);
             else
                 dialogProvider.showToast(R.string.mensaje_no_enviado);
         } catch (IOException e) {
-            Log.println(Log.ASSERT,"API","error");
             dialogProvider.createDialogError(R.string.error_fatal,R.string.mensaje_no_enviado);
             Crashlytics.logException(e);
+
             e.printStackTrace();
         }finally {
+
             this.dismiss();
         }
 
@@ -87,3 +83,4 @@ public class MessageDialogFragment extends DialogFragment {
     }
 
 }
+

@@ -1,6 +1,7 @@
 package ponny.org.monitora.views.paciente;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
@@ -13,30 +14,36 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ponny.org.monitora.R;
 import ponny.org.monitora.views.ParentMain;
+import ponny.org.monitora.views.medico.dialogs.MessageDialogFragment;
+import ponny.org.monitora.views.paciente.dialogs.MessagePatientDialogFragment;
 import ponny.org.monitora.views.paciente.manager.FragmentManagerPatient;
 
 public class PacienteMain extends ParentMain
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private MessagePatientDialogFragment messageProvider;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
+    @BindView(R.id.fab_message)
+    FloatingActionButton message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paciente_main);
         ButterKnife.bind(this);
+
         FragmentManagerPatient fragmentManagerPatient =new FragmentManagerPatient(getSupportFragmentManager(),this);
+
         viewPager.setAdapter(fragmentManagerPatient);
         tabLayout.setupWithViewPager(viewPager);
-        setSupportActionBar(toolbar);
 
+        setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,7 +53,6 @@ public class PacienteMain extends ParentMain
 
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     @Override
@@ -104,6 +110,11 @@ public class PacienteMain extends ParentMain
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    @OnClick(R.id.fab_message)
+    public void OnClickMessage(){
+        MessageDialogFragment messageDialogFragment = MessageDialogFragment.newInstance(getString(R.string.enviar_mensaje));
+        messageDialogFragment.show(getSupportFragmentManager(),"fragment_edit_name");
     }
     private void scanearDispositivo(final boolean enable) {}
 }

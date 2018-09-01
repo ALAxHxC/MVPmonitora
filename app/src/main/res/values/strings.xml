@@ -87,4 +87,5 @@
     <string name="descripccion">¿Que le quieres decir a tu paciente?</string>
     <string name="mensaje_no_enviado">No pudimos enviar tu mensaje</string>
     <string name="messages_enviado">Mensaje Enviado</string>
+    <string name="enviar_mensaje">Enviar mensaje a tu médico</string>
 </resources>

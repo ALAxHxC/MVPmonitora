@@ -46,7 +46,7 @@ public class ApiMonitoraLogin extends ApiMonitora{
 
         UserData userData = getUserData(objeto.getUserObject().getUserTypeDescription(), jsonObject.getJSONObject("user").getJSONObject("userData"));
         objeto.getUserObject().setUserData(userData);
-     //   Log.println(Log.ASSERT, this.getClass().getName(), userData.toString());
+       Log.println(Log.ASSERT, this.getClass().getName(), userData.toString());
         return objeto;
     }
     private UserData getUserData(int userTypeDescription, JSONObject userData) {

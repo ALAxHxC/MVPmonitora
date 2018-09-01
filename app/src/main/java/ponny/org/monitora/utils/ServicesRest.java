@@ -42,7 +42,7 @@ public class ServicesRest {
       Response response=getResponse(request);
       return response;
     }
-    private Response getResponse(Request request) throws IOException {
+    private Response getResponse(Request request) throws IOException,SocketTimeoutException {
         OkHttpClient client = new OkHttpClient();
         Response response = client.newCall(request).execute();
         return response;

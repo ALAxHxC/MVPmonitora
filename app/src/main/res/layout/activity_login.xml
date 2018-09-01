@@ -39,6 +39,8 @@
         android:textColorHint="@android:color/white"
         android:hint="@string/usuario"
         android:imeOptions="actionNext"
+        android:singleLine="true"
+        android:maxLines="1"
         android:backgroundTint="@android:color/white"
         android:textColor="@android:color/white" />
 
