@@ -32,13 +32,13 @@ public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<ItemMessag
     }
 
     @Override
-    public void onBindViewHolder(ItemMessage holder, int position) {
+    public void onBindViewHolder(ItemMessage holder, final int position) {
         holder.from.setText(mValues.get(position).getCreateAt());
         holder.asunto.setText(mValues.get(position).getSubject());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onFragmentInteraction("Prueba");
+                mListener.onFragmentInteraction(mValues.get(position));
             }
         });
     }

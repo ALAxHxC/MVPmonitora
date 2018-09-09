@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import ponny.org.monitora.models.monitora.modelo.mensajes.Message;
 import ponny.org.monitora.presenters.vista.LoginProvider;
 import ponny.org.monitora.presenters.vista.medic.MessagesProvider;
 import ponny.org.monitora.views.common.OnListFragmentInteractionListener;
+import ponny.org.monitora.views.common.dialogs.MessageViewDialogFargment;
 import ponny.org.monitora.views.common.listas.MessagesRecyclerViewAdapter;
 
 
@@ -35,6 +37,7 @@ public class InboxFragmentPatient extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private List<Message> messages;
     private MessagesProvider messagesProvider;
+
     public InboxFragmentPatient() {
         // Required empty public constructor
     }
@@ -64,13 +67,13 @@ public class InboxFragmentPatient extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mListener=new OnListFragmentInteractionListener() {
-            @Override
-            public void onFragmentInteraction(String uri) {
-                Log.println(Log.ASSERT,"prueba",uri);
-            }
 
-            public void onFragmentInteraction(Uri uri) {
-                Log.println(Log.ASSERT,"FRAGMENT",uri.getFragment());
+            @Override
+            public void onFragmentInteraction(Message message) {
+                Log.println(Log.ASSERT,"FRAGMENT",message.getSubject());
+                FragmentManager fm =getFragmentManager();
+                MessageViewDialogFargment messageViewDialogFargment= MessageViewDialogFargment.newInstance(message);
+                messageViewDialogFargment.show(fm,"Fragment");
             }
         };
         // Inflate the layout for this fragment
