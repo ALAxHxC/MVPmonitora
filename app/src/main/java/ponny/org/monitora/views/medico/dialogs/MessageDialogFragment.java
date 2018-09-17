@@ -55,14 +55,15 @@ public class MessageDialogFragment extends DialogFragment {
         ButterKnife.bind(this,view);
         dialogProvider=new DialogProvider(this.getContext());
         messageProvider=new MessageProvider(this.getContext());
-        patient= LoginProvider.getLogin().getUserObject().getUserData().get_id();
+    patient=getArguments().getString("ID");
+        //patient= LoginProvider.getLogin().getUserObject().getUserData().get_id();
         return view;
     }
     @OnClick(R.id.btn_send_message)
     public void sendMessage(){
         Log.println(Log.ASSERT,"API","click");
         try {
-            boolean response=messageProvider.sendMessageAsPatient(asunto,descripccion);
+            boolean response=messageProvider.sendMessageAsMedic(asunto,descripccion,patient);
             if(response)
                 dialogProvider.showToast(R.string.messages_enviado);
             else

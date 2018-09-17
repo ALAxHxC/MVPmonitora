@@ -32,6 +32,7 @@ public class PacienteMain extends ParentMain
     Toolbar toolbar;
     @BindView(R.id.fab_message)
     FloatingActionButton message;
+    private  MessagePatientDialogFragment messageDialogFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +114,7 @@ public class PacienteMain extends ParentMain
     }
     @OnClick(R.id.fab_message)
     public void OnClickMessage(){
-        MessageDialogFragment messageDialogFragment = MessageDialogFragment.newInstance(getString(R.string.enviar_mensaje));
+        messageDialogFragment = MessagePatientDialogFragment.newInstance(getString(R.string.enviar_mensaje));
         messageDialogFragment.show(getSupportFragmentManager(),"fragment_edit_name");
     }
     private void scanearDispositivo(final boolean enable) {}

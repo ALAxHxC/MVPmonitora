@@ -59,13 +59,4 @@
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
-        app:srcCompat="@drawable/min_logo" />
-
 </RelativeLayout>

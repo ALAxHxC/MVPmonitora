@@ -34,7 +34,7 @@ public class ApiMonitora {
                 context.getString(R.string.update_user) +
                 user + "/" +
                 FirebaseInstanceId.getInstance().getToken();
-        Log.println(Log.ASSERT, "HTTPS", url);
+        Log.println(Log.ASSERT, "HTTPS", FirebaseInstanceId.getInstance().getToken());
         Response response = ServicesRest.getInstance().get(url);
         return procesarActualizacion(response.body().string());
     }

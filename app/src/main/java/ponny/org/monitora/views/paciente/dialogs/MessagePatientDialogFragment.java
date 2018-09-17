@@ -37,12 +37,13 @@ public class MessagePatientDialogFragment extends DialogFragment {
 
     }
 
-    public static ponny.org.monitora.views.medico.dialogs.MessageDialogFragment newInstance(String title) {
+    public static MessagePatientDialogFragment newInstance(String title) {
         ponny.org.monitora.views.medico.dialogs.MessageDialogFragment frag = new ponny.org.monitora.views.medico.dialogs.MessageDialogFragment();
         Bundle args = new Bundle();
         args.putString("ID", title);
         frag.setArguments(args);
-        return frag;
+
+        return new MessagePatientDialogFragment();
     }
 
     @Override
@@ -57,7 +58,7 @@ public class MessagePatientDialogFragment extends DialogFragment {
     @OnClick(R.id.btn_send_message)
     public void sendMessage(){
         try {
-            boolean response=messageProvider.sendMessageAsMedic(asunto,descripccion,patient);
+            boolean response=messageProvider.sendMessageAsPatient(asunto,descripccion);
             if(response)
                 dialogProvider.showToast(R.string.messages_enviado);
             else

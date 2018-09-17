@@ -56,7 +56,7 @@ public class MessageProvider {
 
     private Message crearMuestraAsPatient(String asunto, String descripccion) {
         UserDataPaciente userDataPaciente= (UserDataPaciente) LoginProvider.getLogin().getUserObject().getUserData();
-        Log.println(Log.ASSERT,"api",userDataPaciente.getIdMedic());
+        Log.println(Log.ASSERT,"PATIENT",userDataPaciente.getIdMedic());
         Message message = new Message( userDataPaciente.getIdMedic() ,LoginProvider.getLogin().getUserObject().getUserData().get_id());
         message.setDescription(descripccion);
         message.setSubject(asunto);
