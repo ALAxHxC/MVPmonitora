@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import java.util.List;
 import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.pacientes.Entity;
 import ponny.org.monitora.presenters.ActivityProvider;
+import ponny.org.monitora.presenters.DialogProvider;
 import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
 import ponny.org.monitora.views.medico.dialogs.MessageDialogFragment;
 import ponny.org.monitora.views.common.graphs.PulseChart;
@@ -90,7 +92,11 @@ public class VistaPacienteMedico extends AppCompatActivity {
 
     private void loadingMuestras() {
         listaDeMuestras = muestraProvider.getMuestras(paciente.getId());
-
+        Log.println(Log.ASSERT,"HTTP","Lista de muestras"+listaDeMuestras.size());
+        if(listaDeMuestras.size()<=0){
+            super.onBackPressed();
+            DialogProvider.showStaticToast(getBaseContext(),R.string.no_hay_datos);
+        }
     }
 
     @Override
@@ -162,26 +168,32 @@ public class VistaPacienteMedico extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            switch (position) {
-                case 0:
-                    return TomaFragment.newInstance(listaDeMuestras);
-                case 1:
-                    return Spo2Chart.newInstance(listaDeMuestras);
-                case 2:
-                    return PulseChart.newInstance(listaDeMuestras);
+            if (listaDeMuestras.size() == 0)
+                switch (position) {
+                    case 0:
+                        return TomaFragment.newInstance(listaDeMuestras);
+                    case 1:
+                        return Spo2Chart.newInstance(listaDeMuestras);
+                    case 2:
+                        return PulseChart.newInstance(listaDeMuestras);
 
-                default:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    default:
+                        return PlaceholderFragment.newInstance(position + 1);
+                }
+            else {
+                DialogProvider.showStaticToast(getBaseContext(), R.string.no_hay_datos);
+
+                return TomaFragment.newInstance(listaDeMuestras);
             }
-
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            if (listaDeMuestras.size() < 1)
+                // Show 3 total pages.
+                return 3;
+            else
+                return 1;
         }
     }
 }

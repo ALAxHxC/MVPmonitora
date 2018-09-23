@@ -70,6 +70,9 @@ public class DialogProvider {
     public void showToast(int r){
         Toast.makeText(context,r,Toast.LENGTH_LONG).show();
     }
+    public static  void showStaticToast(Context context,int r){
+        Toast.makeText(context,r,Toast.LENGTH_LONG).show();
+    }
     public void showSnack(int r){
         //Snackbar.make()
     }

@@ -23,6 +23,7 @@ import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
 import ponny.org.monitora.presenters.chart.LineChartMuestrasProvider;
 import ponny.org.monitora.views.medico.fragments.pacientes.TomaFragment;
 
+import static ponny.org.monitora.presenters.DialogProvider.showStaticToast;
 import static ponny.org.monitora.views.medico.fragments.pacientes.TomaFragment.ARG_COLUMN_COUNT;
 
 /**
@@ -93,9 +94,13 @@ public class PulseChart extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_pulse_chart, container, false);
         ButterKnife.bind(this, view);
-        lineChartMuestrasProvider=new LineChartMuestrasProvider(linearGraph,muestras);
-        lineChartMuestrasProvider.listaDeDatosMuestrasSpo2();
-        linearGraph.setData(lineChartMuestrasProvider.loadDataSetPulso(getString(R.string.pulso), Color.MAGENTA,Color.WHITE));
+        try {
+            lineChartMuestrasProvider = new LineChartMuestrasProvider(linearGraph, muestras);
+            lineChartMuestrasProvider.listaDeDatosMuestrasSpo2();
+            linearGraph.setData(lineChartMuestrasProvider.loadDataSetPulso(getString(R.string.pulso), Color.MAGENTA, Color.WHITE));
+        }catch (NullPointerException ex){
+            showStaticToast(getContext(),R.string.no_hay_datos);
+        }
         return view;
     }
 

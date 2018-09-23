@@ -22,6 +22,7 @@ import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
 import ponny.org.monitora.presenters.chart.LineChartMuestrasProvider;
 
+import static ponny.org.monitora.presenters.DialogProvider.showStaticToast;
 import static ponny.org.monitora.views.medico.fragments.pacientes.TomaFragment.ARG_COLUMN_COUNT;
 
 /**
@@ -65,14 +66,14 @@ public class Spo2Chart extends Fragment {
     public static Spo2Chart newInstance(List<Muestra> list) {
         Spo2Chart fragment = new Spo2Chart();
         Bundle args = new Bundle();
+        if (list != null) {
+            Gson gson = new Gson();
+            String muestras = gson.toJson(list.toArray());
 
-        Gson gson = new Gson();
-        String muestras = gson.toJson(list.toArray());
+            args.putString(ARG_COLUMN_COUNT, muestras);
 
-        args.putString(ARG_COLUMN_COUNT, muestras);
-
-        fragment.setArguments(args);
-
+            fragment.setArguments(args);
+        }
         return fragment;
     }
 
@@ -82,8 +83,8 @@ public class Spo2Chart extends Fragment {
         super.onCreate(savedInstanceState);
         Gson gson = new Gson();
         if (getArguments() != null) {
-            Muestra[] array  =gson.fromJson(getArguments().getString(ARG_COLUMN_COUNT),Muestra[].class);
-            muestras=new ArrayList<>();
+            Muestra[] array = gson.fromJson(getArguments().getString(ARG_COLUMN_COUNT), Muestra[].class);
+            muestras = new ArrayList<>();
             muestras.addAll(Arrays.asList(array));
         }
     }
@@ -92,12 +93,15 @@ public class Spo2Chart extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_spo2_chart, container, false);
+        View view = inflater.inflate(R.layout.fragment_spo2_chart, container, false);
         ButterKnife.bind(this, view);
-        lineChartMuestrasProvider=new LineChartMuestrasProvider(linearGraph,muestras);
-        lineChartMuestrasProvider.listaDeDatosMuestrasSpo2();
-        linearGraph.setData(lineChartMuestrasProvider.loadDataSetSpo2(getString(R.string.pulso), Color.MAGENTA,Color.WHITE));
-
+        try {
+            lineChartMuestrasProvider = new LineChartMuestrasProvider(linearGraph, muestras);
+            lineChartMuestrasProvider.listaDeDatosMuestrasSpo2();
+            linearGraph.setData(lineChartMuestrasProvider.loadDataSetSpo2(getString(R.string.pulso), Color.MAGENTA, Color.WHITE));
+        } catch (NullPointerException ex) {
+            showStaticToast(getContext(), R.string.no_hay_datos);
+        }
         return view;
     }
 
@@ -107,18 +111,19 @@ public class Spo2Chart extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-/*
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+
+    /*
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            if (context instanceof OnFragmentInteractionListener) {
+                mListener = (OnFragmentInteractionListener) context;
+            } else {
+                throw new RuntimeException(context.toString()
+                        + " must implement OnFragmentInteractionListener");
+            }
         }
-    }
-*/
+    */
     @Override
     public void onDetach() {
         super.onDetach();

@@ -1,6 +1,7 @@
 package ponny.org.monitora.views.medico.fragments;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,9 @@ import ponny.org.monitora.models.monitora.modelo.pacientes.Entity;
 import ponny.org.monitora.models.monitora.modelo.pacientes.ListPatients;
 import ponny.org.monitora.presenters.ActivityProvider;
 import ponny.org.monitora.presenters.listeners.FragmentPatientListener;
-import ponny.org.monitora.views.medico.fragments.dummy.DummyContent.DummyItem;
-
-import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
  * specified {@link FragmentPatientListener}.
  * TODO: Replace the implementation with code for your data type.
  */
@@ -28,6 +26,7 @@ public class PatientsRecyclerViewAdapter extends RecyclerView.Adapter<PatientsRe
     private final ActivityProvider activityProvider;
     public PatientsRecyclerViewAdapter(ListPatients listPatients, FragmentPatientListener listener, ActivityProvider activityProvider) {
         mValues = listPatients;
+        Log.println(Log.ASSERT,"Lista de pacientes",listPatients.getEntity().size()+"");
         mListener = listener;
         this.activityProvider=activityProvider;
     }

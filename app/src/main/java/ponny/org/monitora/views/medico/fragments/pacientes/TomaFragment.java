@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static ponny.org.monitora.presenters.DialogProvider.showStaticToast;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -46,14 +48,14 @@ public class TomaFragment extends Fragment {
     public static TomaFragment newInstance(List<Muestra> list) {
         TomaFragment fragment = new TomaFragment();
         Bundle args = new Bundle();
+        if (list != null) {
+            Gson gson = new Gson();
+            String muestras = gson.toJson(list.toArray());
 
-        Gson gson = new Gson();
-        String muestras = gson.toJson(list.toArray());
+            args.putString(ARG_COLUMN_COUNT, muestras);
 
-        args.putString(ARG_COLUMN_COUNT, muestras);
-
-        fragment.setArguments(args);
-
+            fragment.setArguments(args);
+        }
         return fragment;
     }
 
@@ -62,8 +64,8 @@ public class TomaFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Gson gson = new Gson();
         if (getArguments() != null) {
-            Muestra[] array  =gson.fromJson(getArguments().getString(ARG_COLUMN_COUNT),Muestra[].class);
-            muestras=new ArrayList<>();
+            Muestra[] array = gson.fromJson(getArguments().getString(ARG_COLUMN_COUNT), Muestra[].class);
+            muestras = new ArrayList<>();
             muestras.addAll(Arrays.asList(array));
         }
     }
@@ -72,18 +74,16 @@ public class TomaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tomafragment_list, container, false);
-
+    try {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (muestras.size() <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, 1));
-            }
             recyclerView.setAdapter(new MytomaRecyclerViewAdapter(muestras, null));
         }
+    }catch (NullPointerException ex){
+        showStaticToast(getContext(),R.string.no_hay_datos);
+    }
         return view;
     }
 
