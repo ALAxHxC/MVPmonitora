@@ -15,7 +15,8 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Es nescesario para usar el API de Bluetooth -->
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission-sdk-23>
+    <uses-feature android:name="android.hardware.location.gps" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".views.common.permissions.PermissionCheckActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">

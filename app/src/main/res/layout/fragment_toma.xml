@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="28dp"
         android:layout_weight="1"
-        android:background="?android:attr/textColorHighlight"
+        android:background="@color/colorAccent"
         android:scaleType="matrix"
-        app:srcCompat="?android:attr/textColorHighlightInverse" />
+        app:srcCompat="@color/colorPrimaryDark" />
 
     <ImageView
         android:id="@+id/imageView5"
