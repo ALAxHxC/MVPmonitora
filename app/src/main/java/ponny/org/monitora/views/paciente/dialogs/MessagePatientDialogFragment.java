@@ -1,5 +1,7 @@
 package ponny.org.monitora.views.paciente.dialogs;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,18 +36,21 @@ public class MessagePatientDialogFragment extends DialogFragment {
     private MessageProvider messageProvider;
     private DialogProvider dialogProvider;
     private String patient;
+    private Observer observer;
 
-    public MessagePatientDialogFragment() {
-
+    @SuppressLint("ValidFragment")
+    public MessagePatientDialogFragment(Observer observer) {
+        super();
+        this.observer=observer;
     }
 
-    public static MessagePatientDialogFragment newInstance(String title) {
+    public static MessagePatientDialogFragment newInstance(String title,Observer obseverData) {
         ponny.org.monitora.views.medico.dialogs.MessageDialogFragment frag = new ponny.org.monitora.views.medico.dialogs.MessageDialogFragment();
         Bundle args = new Bundle();
         args.putString("ID", title);
         frag.setArguments(args);
 
-        return new MessagePatientDialogFragment();
+        return new MessagePatientDialogFragment(obseverData);
     }
 
     @Override
@@ -57,19 +64,23 @@ public class MessagePatientDialogFragment extends DialogFragment {
     }
     @OnClick(R.id.btn_send_message)
     public void sendMessage(){
+        boolean response=false;
         try {
-            boolean response=messageProvider.sendMessageAsPatient(asunto,descripccion);
+            response=messageProvider.sendMessageAsPatient(asunto,descripccion);
             if(response)
                 dialogProvider.showToast(R.string.messages_enviado);
             else
                 dialogProvider.showToast(R.string.mensaje_no_enviado);
+           // getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, getActivity().getIntent());
+
         } catch (IOException e) {
             dialogProvider.createDialogError(R.string.error_fatal,R.string.mensaje_no_enviado);
             Crashlytics.logException(e);
+          //  getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_CANCELED, getActivity().getIntent());
 
             e.printStackTrace();
         }finally {
-
+            this.observer.update(new Observable(),new Boolean(response));
             this.dismiss();
         }
 

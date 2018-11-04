@@ -1,9 +1,11 @@
 package ponny.org.monitora.views.common.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,7 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.inbox.Inbox;
 import ponny.org.monitora.models.monitora.modelo.mensajes.Message;
@@ -24,6 +30,7 @@ import ponny.org.monitora.presenters.vista.medic.MessagesProvider;
 import ponny.org.monitora.views.common.OnListFragmentInteractionListener;
 import ponny.org.monitora.views.common.dialogs.MessageViewDialogFargment;
 import ponny.org.monitora.views.common.listas.MessagesRecyclerViewAdapter;
+import ponny.org.monitora.views.paciente.dialogs.MessagePatientDialogFragment;
 
 
 /**
@@ -35,10 +42,14 @@ import ponny.org.monitora.views.common.listas.MessagesRecyclerViewAdapter;
  */
 public class InboxFragmentPatient extends Fragment {
 
-
+    private  MessagePatientDialogFragment messageDialogFragment;
     private OnListFragmentInteractionListener mListener;
     private List<Inbox> messages;
     private MessagesProvider messagesProvider;
+    @BindView(R.id.list)
+    RecyclerView home;
+    @BindView(R.id.messagesend)
+    FloatingActionButton sendMessage;
 
     public InboxFragmentPatient() {
         // Required empty public constructor
@@ -60,69 +71,73 @@ public class InboxFragmentPatient extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         mListener = new OnListFragmentInteractionListener() {
 
             @Override
             public void onFragmentInteraction(Inbox message) {
                 Log.println(Log.ASSERT, "FRAGMENT", message.getSubject());
                 FragmentManager fm = getFragmentManager();
-                Intent intent=new Intent(getContext(),InboxDetails.class);
-                intent.putExtra("Inbox",message);
+                Intent intent = new Intent(getContext(), InboxDetails.class);
+                intent.putExtra("Inbox", message);
                 getContext().startActivity(intent);
-                /*MessageViewDialogFargment messageViewDialogFargment = MessageViewDialogFargment.newInstance(message);
-                messageViewDialogFargment.show(fm, "Fragment");*/
+            }
+
+            @Override
+            public void onSendMessage(boolean result) {
+                if (result){
+                    reaload();
+                }
             }
         };
+        View view = inflater.inflate(R.layout.fragment_inbox_fragment_patient, container, false);
+        ButterKnife.bind(this, view);
         // Inflate the layout for this fragment
         messagesProvider = new MessagesProvider(getActivity());
         messages = messagesProvider.getInboxPatient(LoginProvider.getLogin().getUserObject().getUserData().get_id());
-        // messagesProvider.getMessagesPaciente(LoginProvider.getLogin().getUserObject().getUserData().get_id());
-        //Log.println(Log.ASSERT,"API",messages.size()+"");
-
-        View view = inflater.inflate(R.layout.fragment_inbox_fragment_patient, container, false);
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (messages.size() <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, 1));
-            }
-            recyclerView.setAdapter(new MessagesRecyclerViewAdapter(messages, mListener));
-
-        }
-
+        sendMessage.bringToFront();
+        Context context = view.getContext();
+        reaload();
         return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-
-        if (mListener != null) {
-            // mListener.onFragmentInteraction(uri);
+    private void reaload(){
+        if (messages.size() <= 1) {
+            home.setLayoutManager(new LinearLayoutManager(getContext()));
+        } else {
+            home.setLayoutManager(new GridLayoutManager(getContext(), 1));
         }
+        home.setAdapter(new MessagesRecyclerViewAdapter(messages, mListener));
+
+        sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.println(Log.ASSERT,"OCN","CLIOCK");
+                messageDialogFragment = MessagePatientDialogFragment.newInstance(getString(R.string.enviar_mensaje),new ObseverData());
+                messageDialogFragment.show(getFragmentManager(),"fragment_edit_name");
+            }
+        });
     }
 
-    /*
+    public static final int DIALOG_FRAGMENT = 1;
+    private class ObseverData implements Observer {
+
+
         @Override
-        public void onAttach(Context context) {
-            super.onAttach(context);
-            if (context instanceof OnFragmentInteractionListener) {
-                mListener = (OnFragmentInteractionListener) context;
-            } else {
-                throw new RuntimeException(context.toString()
-                        + " must implement OnFragmentInteractionListener");
-            }
+        public void update(Observable o, Object arg) {
+            Log.println(Log.ASSERT,"RECIBE","FAGMENT");
+            reaload();
         }
-    */
+    }
     @Override
     public void onDetach() {
         super.onDetach();

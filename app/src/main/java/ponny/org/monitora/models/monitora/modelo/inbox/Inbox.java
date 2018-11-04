@@ -51,6 +51,11 @@ public class Inbox implements Serializable
     private Integer v;
     private final static long serialVersionUID = 7429239161570757738L;
 
+    public Inbox(String idMedic, String idPatient) {
+        this.idMedic = idMedic;
+        this.idPatient = idPatient;
+    }
+
     public Boolean getPatientView() {
         return patientView;
     }

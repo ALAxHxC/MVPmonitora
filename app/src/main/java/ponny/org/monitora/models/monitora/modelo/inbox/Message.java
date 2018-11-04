@@ -20,6 +20,12 @@ public class Message implements Serializable
     @SerializedName("message")
     @Expose
     private String message;
+
+    public Message(String name, String message) {
+        this.name = name;
+        this.message = message;
+    }
+
     private final static long serialVersionUID = 6276724059555775280L;
 
     public String getCreateAt() {

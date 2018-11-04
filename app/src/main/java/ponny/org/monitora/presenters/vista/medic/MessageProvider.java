@@ -6,8 +6,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import ponny.org.monitora.models.monitora.modelo.UserDataPaciente;
+import ponny.org.monitora.models.monitora.modelo.inbox.Inbox;
 import ponny.org.monitora.models.monitora.modelo.mensajes.Message;
 import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
 import ponny.org.monitora.models.monitora.servicios.ApiMonitoraInbox;
@@ -29,16 +32,17 @@ public class MessageProvider {
 
     public boolean sendMessageAsMedic(TextView asunto, TextView descripccion, final String paciente) throws IOException {
 
-        this.asunto = asunto;
+       /* this.asunto = asunto;
         this.descripccion = descripccion;
 
-        Message message = crearMuestraAsMedic(
+        Inbox message = crearMuestraAsMedic(
                 MessageProvider.this.asunto.getText().toString(),
                 MessageProvider.this.descripccion.getText().toString(),
                 paciente
         );
         boolean response = apiMonitoraMessages.sendMessage(message);
-        return response;
+        return response;*/
+       return true;
 
     }
 
@@ -48,7 +52,7 @@ public class MessageProvider {
         this.asunto = asunto;
         this.descripccion = descripccion;
 
-        Message message = crearMuestraAsPatient(
+        Inbox message = crearMuestraAsPatient(
                 MessageProvider.this.asunto.getText().toString(),
                 MessageProvider.this.descripccion.getText().toString()
         );
@@ -57,12 +61,14 @@ public class MessageProvider {
 
     }
 
-    private Message crearMuestraAsPatient(String asunto, String descripccion) {
+    private Inbox crearMuestraAsPatient(String asunto, String descripccion) {
+        List<ponny.org.monitora.models.monitora.modelo.inbox.Message> messsage = new ArrayList<>();
+        messsage.add(new ponny.org.monitora.models.monitora.modelo.inbox.Message(LoginProvider.getLogin().getUserObject().getUserData().getFirstNames(),descripccion));
         UserDataPaciente userDataPaciente= (UserDataPaciente) LoginProvider.getLogin().getUserObject().getUserData();
         Log.println(Log.ASSERT,"PATIENT",userDataPaciente.getIdMedic());
-        Message message = new Message( userDataPaciente.getIdMedic() ,LoginProvider.getLogin().getUserObject().getUserData().get_id());
-        message.setDescription(descripccion);
+        Inbox message = new Inbox(userDataPaciente.getIdMedic() ,LoginProvider.getLogin().getUserObject().getUserData().get_id());
         message.setSubject(asunto);
+        message.setMessages(messsage);
         return message;
     }
 

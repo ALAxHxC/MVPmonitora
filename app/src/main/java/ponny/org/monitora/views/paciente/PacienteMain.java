@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -59,9 +60,12 @@ public class PacienteMain extends ParentMain
     private ControllerBLE controllerBLE;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paciente_main);
+
         ButterKnife.bind(this);
+        message.setVisibility(View.INVISIBLE);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
             || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -227,8 +231,8 @@ public class PacienteMain extends ParentMain
     }
     @OnClick(R.id.fab_message)
     public void OnClickMessage(){
-        messageDialogFragment = MessagePatientDialogFragment.newInstance(getString(R.string.enviar_mensaje));
-        messageDialogFragment.show(getSupportFragmentManager(),"fragment_edit_name");
+        /*messageDialogFragment = MessagePatientDialogFragment.newInstance(getString(R.string.enviar_mensaje));
+        messageDialogFragment.show(getSupportFragmentManager(),"fragment_edit_name");*/
     }
     private void scanearDispositivo(final boolean enable) {}
 }

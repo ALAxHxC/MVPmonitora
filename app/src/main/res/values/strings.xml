@@ -14,7 +14,7 @@
     <string name="get_read_message_patient">messages/view/patient/</string>
     <string name="get_read_message_medic">messages/view/medic/</string>
     <string name="get_inbox_patient">inbox/patient/</string>
-    <string name="post_message">messages/</string>
+    <string name="post_message">inbox/</string>
     <!--Bluetooth-->
     <string name="name_device">My Oximeter</string>
     <!--Oximetro-->
