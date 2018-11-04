@@ -1,6 +1,7 @@
 package ponny.org.monitora.views.common.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import ponny.org.monitora.R;
+import ponny.org.monitora.models.monitora.modelo.inbox.Inbox;
 import ponny.org.monitora.models.monitora.modelo.mensajes.Message;
 import ponny.org.monitora.presenters.vista.LoginProvider;
 import ponny.org.monitora.presenters.vista.medic.MessagesProvider;
@@ -35,7 +37,7 @@ public class InboxFragmentPatient extends Fragment {
 
 
     private OnListFragmentInteractionListener mListener;
-    private List<Message> messages;
+    private List<Inbox> messages;
     private MessagesProvider messagesProvider;
 
     public InboxFragmentPatient() {
@@ -66,27 +68,23 @@ public class InboxFragmentPatient extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mListener=new OnListFragmentInteractionListener() {
+        mListener = new OnListFragmentInteractionListener() {
 
             @Override
-            public void onFragmentInteraction(Message message) {
-                Log.println(Log.ASSERT,"FRAGMENT",message.getSubject());
-                FragmentManager fm =getFragmentManager();
-                MessageViewDialogFargment messageViewDialogFargment= MessageViewDialogFargment.newInstance(message);
-                messageViewDialogFargment.show(fm,"Fragment");
+            public void onFragmentInteraction(Inbox message) {
+                Log.println(Log.ASSERT, "FRAGMENT", message.getSubject());
+                FragmentManager fm = getFragmentManager();
+                Intent intent=new Intent(getContext(),InboxDetails.class);
+                intent.putExtra("Inbox",message);
+                getContext().startActivity(intent);
+                /*MessageViewDialogFargment messageViewDialogFargment = MessageViewDialogFargment.newInstance(message);
+                messageViewDialogFargment.show(fm, "Fragment");*/
             }
         };
         // Inflate the layout for this fragment
-        messagesProvider=new MessagesProvider(getActivity());
-        switch (LoginProvider.getLogin().getUserObject().getUserTypeDescription()){
-            case 2:
-                messages=messagesProvider.getMessagesPaciente(LoginProvider.getLogin().getUserObject().getUserData().get_id());
-                break;
-            case 3:
-                messages=messagesProvider.getMessagesMedico(LoginProvider.getLogin().getUserObject().getUserData().get_id());
-                break;
-        }
-       // messagesProvider.getMessagesPaciente(LoginProvider.getLogin().getUserObject().getUserData().get_id());
+        messagesProvider = new MessagesProvider(getActivity());
+        messages = messagesProvider.getInboxPatient(LoginProvider.getLogin().getUserObject().getUserData().get_id());
+        // messagesProvider.getMessagesPaciente(LoginProvider.getLogin().getUserObject().getUserData().get_id());
         //Log.println(Log.ASSERT,"API",messages.size()+"");
 
         View view = inflater.inflate(R.layout.fragment_inbox_fragment_patient, container, false);
@@ -109,21 +107,22 @@ public class InboxFragmentPatient extends Fragment {
     public void onButtonPressed(Uri uri) {
 
         if (mListener != null) {
-           // mListener.onFragmentInteraction(uri);
+            // mListener.onFragmentInteraction(uri);
         }
     }
-/*
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+
+    /*
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            if (context instanceof OnFragmentInteractionListener) {
+                mListener = (OnFragmentInteractionListener) context;
+            } else {
+                throw new RuntimeException(context.toString()
+                        + " must implement OnFragmentInteractionListener");
+            }
         }
-    }
-*/
+    */
     @Override
     public void onDetach() {
         super.onDetach();

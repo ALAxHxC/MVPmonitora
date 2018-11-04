@@ -10,6 +10,7 @@ import java.io.IOException;
 import ponny.org.monitora.models.monitora.modelo.UserDataPaciente;
 import ponny.org.monitora.models.monitora.modelo.mensajes.Message;
 import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
+import ponny.org.monitora.models.monitora.servicios.ApiMonitoraInbox;
 import ponny.org.monitora.models.monitora.servicios.ApiMonitoraMessages;
 import ponny.org.monitora.presenters.vista.LoginProvider;
 
@@ -18,10 +19,12 @@ public class MessageProvider {
     private TextView asunto;
     private TextView descripccion;
     private ApiMonitoraMessages apiMonitoraMessages;
+    private ApiMonitoraInbox apiMonitoraInbox;
 
     public MessageProvider(Context context) {
         this.context = context;
         apiMonitoraMessages = new ApiMonitoraMessages(context);
+        this.apiMonitoraInbox=new ApiMonitoraInbox(context);
     }
 
     public boolean sendMessageAsMedic(TextView asunto, TextView descripccion, final String paciente) throws IOException {

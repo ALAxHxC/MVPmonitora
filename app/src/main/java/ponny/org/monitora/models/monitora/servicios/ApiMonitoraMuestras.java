@@ -35,7 +35,7 @@ public class ApiMonitoraMuestras extends ApiMonitora {
     }
 
     public Muestra[] getMuestras(String id) throws IOException {
-        String url = context.getString(R.string.base_url) + context.getString(R.string.muestra) + id;
+        String url = context.getString(R.string.base_url) + context.getString(R.string.search_triage) + id;
         Response response = ServicesRest.getInstance().get(url);
         return procesarMuestras(response.body().string());
     }

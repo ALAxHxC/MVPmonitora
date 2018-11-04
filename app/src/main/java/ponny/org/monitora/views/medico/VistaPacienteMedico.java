@@ -92,8 +92,9 @@ public class VistaPacienteMedico extends AppCompatActivity {
 
     private void loadingMuestras() {
         listaDeMuestras = muestraProvider.getMuestras(paciente.getId());
+        int muestras=listaDeMuestras.size();
         Log.println(Log.ASSERT,"HTTP","Lista de muestras"+listaDeMuestras.size());
-        if(listaDeMuestras.size()<=0){
+        if(muestras<=0){
             super.onBackPressed();
             DialogProvider.showStaticToast(getBaseContext(),R.string.no_hay_datos);
         }
@@ -168,32 +169,24 @@ public class VistaPacienteMedico extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (listaDeMuestras.size() == 0)
-                switch (position) {
-                    case 0:
-                        return TomaFragment.newInstance(listaDeMuestras);
-                    case 1:
-                        return Spo2Chart.newInstance(listaDeMuestras);
-                    case 2:
-                        return PulseChart.newInstance(listaDeMuestras);
 
-                    default:
-                        return PlaceholderFragment.newInstance(position + 1);
-                }
-            else {
-                DialogProvider.showStaticToast(getBaseContext(), R.string.no_hay_datos);
+            switch (position) {
+                case 0:
+                    return TomaFragment.newInstance(listaDeMuestras);
+                case 1:
+                    return Spo2Chart.newInstance(listaDeMuestras);
+                case 2:
+                    return PulseChart.newInstance(listaDeMuestras);
 
-                return TomaFragment.newInstance(listaDeMuestras);
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
             }
+
         }
 
         @Override
         public int getCount() {
-            if (listaDeMuestras.size() < 1)
-                // Show 3 total pages.
-                return 3;
-            else
-                return 1;
+            return 3;
         }
     }
 }

@@ -6,12 +6,14 @@
     <string name="update_user">users/search/</string>
     <string name="get_patients">patient/medic/</string>
     <string name="muestra">traige/</string>
+    <string name="search_triage">traige/search/</string>
     <string name="username_body">username</string>
     <string name="password_body">password</string>
     <string name="get_messages_patient">messages/patient/</string>
     <string name="get_messages_medic">messages/medic/</string>
     <string name="get_read_message_patient">messages/view/patient/</string>
     <string name="get_read_message_medic">messages/view/medic/</string>
+    <string name="get_inbox_patient">inbox/patient/</string>
     <string name="post_message">messages/</string>
     <!--Bluetooth-->
     <string name="name_device">My Oximeter</string>
@@ -88,4 +90,5 @@
     <string name="mensaje_no_enviado">No pudimos enviar tu mensaje</string>
     <string name="messages_enviado">Mensaje Enviado</string>
     <string name="enviar_mensaje">Enviar mensaje a tu médico</string>
+    <string name="title_activity_inbox_details">InboxDetails</string>
 </resources>

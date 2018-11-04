@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ponny.org.monitora.R;
+import ponny.org.monitora.models.monitora.modelo.inbox.Inbox;
 import ponny.org.monitora.models.monitora.modelo.mensajes.Message;
 
 public class MessageViewDialogFargment extends DialogFragment {
@@ -23,12 +24,12 @@ public class MessageViewDialogFargment extends DialogFragment {
     TextView descripccion;
     @BindView(R.id.btn_send_message)
     FloatingActionButton send;
-    private Message message;
+    private Inbox message;
 
     public MessageViewDialogFargment() {
     }
 
-    public static MessageViewDialogFargment newInstance(Message message) {
+    public static MessageViewDialogFargment newInstance(Inbox message) {
         MessageViewDialogFargment messageViewDialogFargment=new MessageViewDialogFargment();
         Bundle args = new Bundle();
         args.putSerializable("id",message);
@@ -41,18 +42,15 @@ public class MessageViewDialogFargment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_message, container);
         ButterKnife.bind(this, view);
-        message= (Message) getArguments().getSerializable("id");
+        message= (Inbox) getArguments().getSerializable("id");
         showMessage(message);
         return view;
     }
-    private void showMessage(Message message){
+    private void showMessage(Inbox message){
         asunto.setText(message.getSubject());
         asunto.setFocusable(false);
         asunto.setFocusableInTouchMode(false);
         asunto.setClickable(false);
-        descripccion.setText(message.getDescription());
-        descripccion.setFocusable(false);
-        descripccion.setFocusableInTouchMode(false);
         descripccion.setClickable(false);
     }
     @OnClick(R.id.btn_send_message)

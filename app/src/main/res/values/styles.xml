@@ -51,6 +51,7 @@
 
         </item>
     </style>
+
     <style name="label" parent="Base.TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:fontFamily">sans-serif</item>

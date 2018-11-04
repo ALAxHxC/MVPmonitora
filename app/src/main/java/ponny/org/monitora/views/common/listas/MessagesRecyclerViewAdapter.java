@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import ponny.org.monitora.R;
+import ponny.org.monitora.models.monitora.modelo.inbox.Inbox;
 import ponny.org.monitora.models.monitora.modelo.mensajes.Message;
 import ponny.org.monitora.views.common.OnListFragmentInteractionListener;
 import ponny.org.monitora.views.common.listas.items.ItemMessage;
@@ -16,10 +17,10 @@ import ponny.org.monitora.views.common.listas.items.ItemMessage;
 public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<ItemMessage> {
 
 
-    private final List<Message> mValues;
+    private final List<Inbox> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MessagesRecyclerViewAdapter(List<Message> mValues, OnListFragmentInteractionListener mListener) {
+    public MessagesRecyclerViewAdapter(List<Inbox> mValues, OnListFragmentInteractionListener mListener) {
         this.mValues = mValues;
         this.mListener = mListener;
     }

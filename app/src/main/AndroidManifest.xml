@@ -15,8 +15,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Es nescesario para usar el API de Bluetooth -->
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission-sdk-23>
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.location.gps" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -71,6 +73,10 @@
         <activity
             android:name=".views.medico.VistaPacienteMedico"
             android:label="@string/title_activity_vista_paciente_medico"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.common.fragments.InboxDetails"
+            android:label="@string/title_activity_inbox_details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
