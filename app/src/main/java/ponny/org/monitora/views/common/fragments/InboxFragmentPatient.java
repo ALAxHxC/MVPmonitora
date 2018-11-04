@@ -111,6 +111,7 @@ public class InboxFragmentPatient extends Fragment {
         return view;
     }
     private void reaload(){
+        messages = messagesProvider.getInboxPatient(LoginProvider.getLogin().getUserObject().getUserData().get_id());
         if (messages.size() <= 1) {
             home.setLayoutManager(new LinearLayoutManager(getContext()));
         } else {

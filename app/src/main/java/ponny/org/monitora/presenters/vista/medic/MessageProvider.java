@@ -27,7 +27,7 @@ public class MessageProvider {
     public MessageProvider(Context context) {
         this.context = context;
         apiMonitoraMessages = new ApiMonitoraMessages(context);
-        this.apiMonitoraInbox=new ApiMonitoraInbox(context);
+        this.apiMonitoraInbox = new ApiMonitoraInbox(context);
     }
 
     public boolean sendMessageAsMedic(TextView asunto, TextView descripccion, final String paciente) throws IOException {
@@ -42,11 +42,17 @@ public class MessageProvider {
         );
         boolean response = apiMonitoraMessages.sendMessage(message);
         return response;*/
-       return true;
+        return true;
 
     }
 
-
+    public boolean appendMessage(TextView response, Inbox inbox) throws IOException {
+        ponny.org.monitora.models.monitora.modelo.inbox.Message message = new ponny.org.monitora.models.monitora.modelo.inbox.Message(
+                LoginProvider.getLogin().getUserObject().getUserData().getFirstNames() + " " + LoginProvider.getLogin().getUserObject().getUserData().getLastNames(),
+                response.getText().toString());
+                boolean respuesta = apiMonitoraInbox.sendResponse(message,inbox.getId());
+                return  respuesta;
+    }
     public boolean sendMessageAsPatient(TextView asunto, TextView descripccion) throws IOException {
 
         this.asunto = asunto;
@@ -63,17 +69,17 @@ public class MessageProvider {
 
     private Inbox crearMuestraAsPatient(String asunto, String descripccion) {
         List<ponny.org.monitora.models.monitora.modelo.inbox.Message> messsage = new ArrayList<>();
-        messsage.add(new ponny.org.monitora.models.monitora.modelo.inbox.Message(LoginProvider.getLogin().getUserObject().getUserData().getFirstNames(),descripccion));
-        UserDataPaciente userDataPaciente= (UserDataPaciente) LoginProvider.getLogin().getUserObject().getUserData();
-        Log.println(Log.ASSERT,"PATIENT",userDataPaciente.getIdMedic());
-        Inbox message = new Inbox(userDataPaciente.getIdMedic() ,LoginProvider.getLogin().getUserObject().getUserData().get_id());
+        messsage.add(new ponny.org.monitora.models.monitora.modelo.inbox.Message(LoginProvider.getLogin().getUserObject().getUserData().getFirstNames(), descripccion));
+        UserDataPaciente userDataPaciente = (UserDataPaciente) LoginProvider.getLogin().getUserObject().getUserData();
+        Log.println(Log.ASSERT, "PATIENT", userDataPaciente.getIdMedic());
+        Inbox message = new Inbox(userDataPaciente.getIdMedic(), LoginProvider.getLogin().getUserObject().getUserData().get_id());
         message.setSubject(asunto);
         message.setMessages(messsage);
         return message;
     }
 
     private Message crearMuestraAsMedic(String asunto, String descripccion, String paciente) {
-        Message message = new Message( LoginProvider.getLogin().getUserObject().getUserData().get_id(),paciente);
+        Message message = new Message(LoginProvider.getLogin().getUserObject().getUserData().get_id(), paciente);
         message.setDescription(descripccion);
         message.setSubject(asunto);
         return message;

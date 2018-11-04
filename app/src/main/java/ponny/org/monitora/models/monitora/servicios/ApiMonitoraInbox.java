@@ -1,6 +1,7 @@
 package ponny.org.monitora.models.monitora.servicios;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -26,5 +27,15 @@ public class ApiMonitoraInbox  extends ApiMonitora {
         Gson gson=new Gson();
         Inbox[] messages=gson.fromJson(mensajes,Inbox[].class);
         return messages;
+    }
+    public boolean sendResponse(ponny.org.monitora.models.monitora.modelo.inbox.Message message, String id) throws IOException {
+        String url = context.getString(R.string.base_url) + context.getString(R.string.post_message) + id;
+        Log.println(Log.ASSERT,"Enviando mensaje",url);
+        Gson gson = new Gson();
+        String data = gson.toJson(message, ponny.org.monitora.models.monitora.modelo.inbox.Message.class);
+        Response response = ServicesRest.getInstance().post(data, url);
+        Log.println(Log.ASSERT, "api", response.body().string());
+        return response.code() == 201 ? true : false;
+
     }
 }

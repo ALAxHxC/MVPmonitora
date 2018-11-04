@@ -26,6 +26,7 @@ import ponny.org.monitora.presenters.DialogProvider;
 import ponny.org.monitora.presenters.vista.medic.MessageProvider;
 
 
+@SuppressLint("ValidFragment")
 public class MessagePatientDialogFragment extends DialogFragment {
     @BindView(R.id.txt_asunto)
     TextView asunto;

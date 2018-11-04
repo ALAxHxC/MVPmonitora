@@ -91,4 +91,5 @@
     <string name="messages_enviado">Mensaje Enviado</string>
     <string name="enviar_mensaje">Enviar mensaje a tu médico</string>
     <string name="title_activity_inbox_details">InboxDetails</string>
+    <string name="Respuesta">response</string>
 </resources>
