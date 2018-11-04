@@ -129,7 +129,6 @@ public class InboxFragmentPatient extends Fragment {
         });
     }
 
-    public static final int DIALOG_FRAGMENT = 1;
     private class ObseverData implements Observer {
 
 

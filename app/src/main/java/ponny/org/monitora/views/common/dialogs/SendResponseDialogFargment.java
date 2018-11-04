@@ -22,6 +22,7 @@ import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.inbox.Inbox;
 import ponny.org.monitora.presenters.vista.medic.MessageProvider;
 
+@SuppressLint("ValidFragment")
 public class SendResponseDialogFargment extends DialogFragment {
 
     @BindView(R.id.txt_response)
@@ -68,8 +69,9 @@ public class SendResponseDialogFargment extends DialogFragment {
             ex.printStackTrace();
         }
         finally {
+            SendResponseDialogFargment.this.dismiss();
             observer.update(new Observable(),response);
-            this.dismiss();
+           //
 
         }
 

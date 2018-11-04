@@ -53,29 +53,24 @@ public class InboxDetails extends AppCompatActivity {
                     ft.remove(prev);
                 }
                 ft.addToBackStack(null);
-                sendResponseDialogFargment = SendResponseDialogFargment.newInstance(message, observer);
+                sendResponseDialogFargment = SendResponseDialogFargment.newInstance(message, new InboxDetails.ObseverData());
                 sendResponseDialogFargment.show(ft, "Test");
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
             }
         });
     }
-
-    public final Observer observer = new Observer() {
+    private class ObseverData implements java.util.Observer {
         @Override
         public void update(Observable o, Object arg) {
-
             if ((Boolean) arg) {
                 Toast.makeText(getApplicationContext(), getString(R.string.messages_enviado), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.mensaje_no_enviado), Toast.LENGTH_SHORT).show();
             }
-
-
-            loadInbox();
             InboxDetails.super.onBackPressed();
         }
-    };
+    }
 
     public void loadInbox() {
         inbox_messages.setLayoutManager(new LinearLayoutManager(this));
