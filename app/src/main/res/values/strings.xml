@@ -72,9 +72,8 @@
     <string name="anotaciones">Anotaciones</string>
     <string name="notas">¿Como te sientes?</string>
     <string name="no_hay_datos">No hay registros</string>
-    <string name="registro_guardado">¡Envíado!</string>
+    <string name="registro_guardado">¡Tu toma a sido enviada!</string>
     <string name="registro_no_guardado">Envío fallido</string>
-    <string name="Fecha">Fecha</string>
     <string name="activity">Activity</string>
     <string name="messages">Mensajes</string>
     <string name="title_activity_vista_paciente_medico">VistaPacienteMedico</string>
@@ -93,4 +92,7 @@
     <string name="title_activity_inbox_details">InboxDetails</string>
     <string name="Respuesta">response</string>
     <string name="respuesta">Enviar Respuesta</string>
+    <string name="porfavor_encienda_el_dispositivo">Por favor encienda el dispositivo</string>
+    <string name="Obteniendo_Muestra">Obteniendo Muestra</string>
+    <string name="Fecha">Fecha</string>
 </resources>

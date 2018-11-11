@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Observable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,6 +20,7 @@ import butterknife.OnClick;
 import ponny.org.monitora.R;
 import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
 import ponny.org.monitora.presenters.vista.paciente.HomeProviderPaciente;
+import ponny.org.monitora.views.common.fragments.InboxDetails;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -101,17 +105,17 @@ public class HomePacienteFragment extends Fragment {
     }
     @OnClick(R.id.home_user_save)
     public void subirMuestra(){
-        homeProviderPaciente.subirMuestra();
+        homeProviderPaciente.subirMuestra(new ObserverData());
     }
 
     public void loadDataMuestras() {
-        try {
-            pulse.setText(MuestraProvider.getMuestra().getData().getOximeter().getPulse() + "");
-            spo2.setText(MuestraProvider.getMuestra().getData().getOximeter().getSpo2() + "");
-            peso.setText(MuestraProvider.getMuestra().getData().getWeigth() + "");
-            gluco.setText(MuestraProvider.getMuestra().getData().getGlucose().getGluco() + "");
-        } catch (Exception ex) {
-            ex.printStackTrace();
+         try {
+                pulse.setText(MuestraProvider.getMuestra().getData().getOximeter().getPulse() + "");
+                spo2.setText(MuestraProvider.getMuestra().getData().getOximeter().getSpo2() + "");
+                peso.setText(MuestraProvider.getMuestra().getData().getWeigth() + "");
+                gluco.setText(MuestraProvider.getMuestra().getData().getGlucose().getGluco() + "");
+            } catch (Exception ex) {
+                ex.printStackTrace();
             Log.println(Log.ASSERT, "BE", ex.getMessage());
         }
     }
@@ -174,5 +178,16 @@ public class HomePacienteFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    private class ObserverData implements java.util.Observer {
+        @Override
+        public void update(Observable o, Object arg) {
+            boolean reboot = (Boolean) arg;
+            if(reboot){
+                MuestraProvider.initMuestra();
+            }
+            loadDataMuestras();
+           Log.println(Log.ASSERT,"data","data");
+        }
     }
 }

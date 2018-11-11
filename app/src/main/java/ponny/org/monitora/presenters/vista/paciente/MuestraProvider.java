@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Observer;
 import java.util.Vector;
 
 import ponny.org.monitora.R;
@@ -42,6 +43,7 @@ public class MuestraProvider {
         this.controllerBLE=new ControllerBLE(activity,null);
         activityProvider=new ActivityProvider(activity);
         apiMonitoraMuestras=new ApiMonitoraMuestras(activity);
+
         ////Log.println(Log.ASSERT,"BLE","Datos medicos "+LoginProvider.getLogin().getUserObject().getUserData().getIdMedic());
         contador=0;
     }
@@ -124,7 +126,9 @@ public class MuestraProvider {
     }
     public static void initMuestra(){
         muestra=new Muestra(LoginProvider.getLogin().getUserObject().getUserData().get_id(),((UserDataPaciente)LoginProvider.getLogin().getUserObject().getUserData()).getIdMedic());
-
+        muestra.getData().getOximeter().setSpo2(0);
+        muestra.getData().getOximeter().setPulse(0);
+        muestra.getData().getOximeter().setPi(0);
     }
     public static Muestra getMuestra(){
         try {
@@ -150,4 +154,5 @@ public class MuestraProvider {
             return null;
         }
     }
+
 }

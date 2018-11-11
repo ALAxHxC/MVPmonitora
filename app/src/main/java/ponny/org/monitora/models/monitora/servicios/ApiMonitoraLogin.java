@@ -30,6 +30,7 @@ public class ApiMonitoraLogin extends ApiMonitora{
         JSONObject body = createLogin(user, password);
        // Log.println(Log.ASSERT, "HTTPS", body.toString());
         Response response = ServicesRest.getInstance().post(body.toString(), url);
+       // Log.println(Log.ASSERT,"SQL",response.body().string());
         return convertBodyToObject(response.body().string());
 
     }

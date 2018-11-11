@@ -6,8 +6,11 @@ import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
 import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
@@ -21,6 +24,8 @@ public class HomeProviderPaciente {
     private Activity activity;
     private DialogProviderPaciente dialogProvider;
     private ActivityProvider activityProvider;
+    private FragmentActivity fragmentActivity;
+    private Observer observer;
 
     public HomeProviderPaciente(FragmentActivity activity) {
         this.dialogProvider = new DialogProviderPaciente(activity);
@@ -31,6 +36,7 @@ public class HomeProviderPaciente {
 
     public void scanBLE() {
         Log.println(Log.ASSERT, this.getClass().getName(), "Inicia sscan");
+        dialogProvider.showToast(R.string.porfavor_encienda_el_dispositivo);
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
             controllerBLE.getAdapter().startLeScan(controllerBLE.mLeScanCallback);
             //controlerBLE.getAdapter().startLeScan(mLeScanCallback);
@@ -47,7 +53,8 @@ public class HomeProviderPaciente {
         }
     }
 
-    public void subirMuestra() {
+    public void subirMuestra(Observer observer) {
+        this.observer=observer;
         try {
             if (Muestra.possibleSend(MuestraProvider.getMuestra().getData())) {
                 enviarMuestra(dialogProvider.recogerMuestra());
@@ -88,6 +95,7 @@ public class HomeProviderPaciente {
         if (resultado) {
             MuestraProvider.initMuestra();
             dialogProvider.showToast(R.string.registro_guardado);
+            observer.update(new Observable(),true);
         } else
             dialogProvider.showToast(R.string.registro_no_guardado);
 
