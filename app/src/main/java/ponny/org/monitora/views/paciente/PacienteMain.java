@@ -34,10 +34,12 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ponny.org.monitora.LoginActivity;
 import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.Login;
 import ponny.org.monitora.presenters.ActivityProvider;
 import ponny.org.monitora.presenters.bluetooth.ControllerBLE;
+import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
 import ponny.org.monitora.views.ParentMain;
 import ponny.org.monitora.views.common.permissions.PermissionCheckActivity;
 import ponny.org.monitora.views.medico.dialogs.MessageDialogFragment;
@@ -179,30 +181,8 @@ public class PacienteMain extends ParentMain
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+           // super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.paciente_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -211,17 +191,12 @@ public class PacienteMain extends ParentMain
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.close) {
+            startActivity(new Intent(this,LoginActivity.class));
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+           // this.startActivity(new Intent());
+        } else if (id == R.id.restart) {
+            MuestraProvider.initMuestra();
 
         }
 
@@ -235,4 +210,5 @@ public class PacienteMain extends ParentMain
         messageDialogFragment.show(getSupportFragmentManager(),"fragment_edit_name");*/
     }
     private void scanearDispositivo(final boolean enable) {}
+
 }

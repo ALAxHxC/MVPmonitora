@@ -50,18 +50,18 @@
     <string name="no">No</string>
     <string name="error_sesion">Error en inicio de sesión</string>
     <string name="verifique_datos">Verifique sus datos</string>
-    <string name="title_activity_paciente_main">PacienteMain</string>
-    <string name="title_activity_medico_main">MedicoMain</string>
+    <string name="title_activity_paciente_main">Monitora</string>
+    <string name="title_activity_medico_main">Monitora</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="perfil">Perfil</string>
-    <string name="dash">Dashboard</string>
+    <string name="dash">Tomas</string>
     <string name="inbox">Inbox</string>
-    <string name="home">Home</string>
+    <string name="home">Muestra</string>
     <string name="error_fatal">Error fatal</string>
     <string name="No_bluetooth">No se encuentra bluetooth en el dispositivo</string>
-    <string name="title_activity_muestra_oximetria">MuestraOximetria</string>
+    <string name="title_activity_muestra_oximetria">Monitora</string>
     <string name="address">Address</string>
     <string name="ob_medicos">Obteniendo datos médicos</string>
     <string name="pulso">Pulso</string>
@@ -76,7 +76,7 @@
     <string name="registro_no_guardado">Envío fallido</string>
     <string name="activity">Activity</string>
     <string name="messages">Mensajes</string>
-    <string name="title_activity_vista_paciente_medico">VistaPacienteMedico</string>
+    <string name="title_activity_vista_paciente_medico">Monitora</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
@@ -89,10 +89,16 @@
     <string name="mensaje_no_enviado">No pudimos enviar tu mensaje</string>
     <string name="messages_enviado">Mensaje Enviado</string>
     <string name="enviar_mensaje">Enviar mensaje a tu médico</string>
-    <string name="title_activity_inbox_details">InboxDetails</string>
+    <string name="title_activity_inbox_details">Monitora</string>
     <string name="Respuesta">response</string>
     <string name="respuesta">Enviar Respuesta</string>
     <string name="porfavor_encienda_el_dispositivo">Por favor encienda el dispositivo</string>
     <string name="Obteniendo_Muestra">Obteniendo Muestra</string>
     <string name="Fecha">Fecha</string>
+    <string name="PI">PI</string>
+    <string name="paciente_dijo">El paciente se siente:</string>
+    <string name="reiniciar">Reiniciar</string>
+    <string name="sesion">Sesión</string>
+    <string name="salir">Salir</string>
+    <string name="datos_enviados">Oximetria Registrada</string>
 </resources>

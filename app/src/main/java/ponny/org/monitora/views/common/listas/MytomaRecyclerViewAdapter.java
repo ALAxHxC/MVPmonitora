@@ -8,17 +8,20 @@ import android.view.ViewGroup;
 import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
 import ponny.org.monitora.views.common.listas.items.ItemToma;
+import ponny.org.monitora.views.common.permissions.OnSelectMuestra;
 import ponny.org.monitora.views.paciente.fragments.TomaFragment.OnListFragmentInteractionListener;
 
 
 import java.util.List;
 
+import static ponny.org.monitora.utils.Utils.getPrettyDateFromString;
+
 public class MytomaRecyclerViewAdapter extends RecyclerView.Adapter<ItemToma> {
 
     private final List<Muestra> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final OnSelectMuestra mListener;
 
-    public MytomaRecyclerViewAdapter(List<Muestra> items, OnListFragmentInteractionListener listener) {
+    public MytomaRecyclerViewAdapter(List<Muestra> items, OnSelectMuestra listener) {
         mValues = items;
         mListener = listener;
     }
@@ -34,7 +37,8 @@ public class MytomaRecyclerViewAdapter extends RecyclerView.Adapter<ItemToma> {
     @Override
     public void onBindViewHolder(final ItemToma holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.fecha.setText(mValues.get(position).getCreateAt());
+        String create = getPrettyDateFromString(mValues.get(position).getCreateAt());
+        holder.fecha.setText(create);
         holder.pulso.setText(mValues.get(position).getData().getOximeter().getPulse() + "");
         holder.spo2.setText(mValues.get(position).getData().getOximeter().getSpo2() + "");
 
@@ -44,7 +48,7 @@ public class MytomaRecyclerViewAdapter extends RecyclerView.Adapter<ItemToma> {
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.sendMuestra(holder.mItem);
                 }
             }
         });

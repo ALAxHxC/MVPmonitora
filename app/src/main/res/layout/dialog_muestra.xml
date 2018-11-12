@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="309dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/anotaciones"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintBottom_toTopOf="@+id/txt_detail_fecha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_detail_description"
+        android:layout_width="308dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/notas"
+        android:inputType="textImeMultiLine"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_save_description"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:backgroundTint="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_detail_description"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+    <TextView
+        android:id="@+id/txt_detail_fecha"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="viewEnd"
+        android:textAppearance="@style/label_show"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="46dp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/Fecha"
+        android:textAppearance="@style/MyCustomTextAppearance"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_detail_fecha"
+        app:layout_constraintEnd_toStartOf="@+id/txt_detail_fecha"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_detail_fecha"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/pulso"
+        android:textAppearance="@style/MyCustomTextAppearance"
+        app:layout_constraintEnd_toStartOf="@+id/txt_detail_pulse"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/txt_detail_pulse"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="viewEnd"
+        android:textAppearance="@style/label_show"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_detail_fecha" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/spo2"
+        android:textAppearance="@style/MyCustomTextAppearance"
+        app:layout_constraintEnd_toStartOf="@+id/txt_detail_spo2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/txt_detail_spo2"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="viewEnd"
+        android:textAppearance="@style/label_show"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_detail_pulse" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="121dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/PI"
+        android:textAppearance="@style/MyCustomTextAppearance"
+        app:layout_constraintEnd_toStartOf="@+id/txt_detail_pi"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/txt_detail_pi"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="viewEnd"
+        android:textAppearance="@style/label_show"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_detail_spo2" />
+</android.support.constraint.ConstraintLayout>

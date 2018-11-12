@@ -14,6 +14,8 @@ import ponny.org.monitora.views.common.OnListFragmentInteractionListener;
 import ponny.org.monitora.views.common.listas.items.ItemInbox;
 import ponny.org.monitora.views.common.listas.items.ItemMessage;
 
+import static ponny.org.monitora.utils.Utils.getPrettyDateFromString;
+
 public class InboxRecyclerViewAdapter extends RecyclerView.Adapter<ItemInbox> {
 
 
@@ -35,7 +37,8 @@ public class InboxRecyclerViewAdapter extends RecyclerView.Adapter<ItemInbox> {
     public void onBindViewHolder(ItemInbox holder, final int position) {
         holder.txt_name.setText(mValues.get(position).getName());
         holder.txt_message.setText(mValues.get(position).getMessage());
-        holder.txt_create.setText(mValues.get(position).getCreateAt());
+        String create = getPrettyDateFromString(mValues.get(position).getCreateAt());
+        holder.txt_create.setText(create);
 
 
     }

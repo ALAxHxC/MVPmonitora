@@ -3,9 +3,11 @@ package ponny.org.monitora.views.paciente.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,11 @@ import ponny.org.monitora.R;
 import ponny.org.monitora.models.monitora.modelo.muestra.Muestra;
 import ponny.org.monitora.presenters.vista.LoginProvider;
 import ponny.org.monitora.presenters.vista.paciente.MuestraProvider;
+import ponny.org.monitora.views.common.fragments.InboxFragmentPatient;
 import ponny.org.monitora.views.common.listas.MytomaRecyclerViewAdapter;
+import ponny.org.monitora.views.common.permissions.OnSelectMuestra;
+import ponny.org.monitora.views.paciente.dialogs.MessagePatientDialogFragment;
+import ponny.org.monitora.views.paciente.dialogs.MuestraDetailDialogFragment;
 
 /**
  * A fragment representing a list of Items.
@@ -30,7 +36,14 @@ public class TomaFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private MuestraDetailDialogFragment muestraDetailDialogFragment;
+    private OnSelectMuestra mListener=new OnSelectMuestra() {
+        @Override
+        public void sendMuestra(Muestra muestra) {
+            muestraDetailDialogFragment = MuestraDetailDialogFragment.newInstance(getString(R.string.enviar_mensaje),muestra);
+            muestraDetailDialogFragment.show(getFragmentManager(),"fragment_edit_name");
+        }
+    };
     private MuestraProvider muestraProvider;
     private List<Muestra> muestras;
 
@@ -65,17 +78,13 @@ public class TomaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_toma_list, container, false);
         muestraProvider=new MuestraProvider(this.getActivity());
+
         muestras=muestraProvider.getMuestras(LoginProvider.getLogin().getUserObject().getUserData().get_id());
       //  Log.println(Log.ASSERT,"API",muestras.toString());
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (muestras.size() <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
             recyclerView.setAdapter(new MytomaRecyclerViewAdapter(muestras, mListener));
         }
         return view;

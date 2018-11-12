@@ -73,7 +73,8 @@ public class MuestraOximetria extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         unbindService(muestraProvider.getServiceConnection());
-        muestraProvider.volverAlInicio();
+        //muestraProvider.volverAlInicio();
+        super.onBackPressed();
     }
 
     /**

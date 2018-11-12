@@ -8,6 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -114,11 +115,10 @@ public class MuestraProvider {
         if(muestra.getData().getOximeter().datosValidos()){
             contador++;
         }
-
-
     }
     private void enviarMuestra(){
         if(contador>=context.getResources().getInteger(R.integer.valores_validos)){
+            Toast.makeText(context,R.string.datos_enviados,Toast.LENGTH_SHORT).show();
             activityProvider.goPacienteMain(LoginProvider.getLogin());
 
         }

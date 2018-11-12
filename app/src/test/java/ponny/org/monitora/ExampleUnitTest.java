@@ -1,5 +1,7 @@
 package ponny.org.monitora;
 
+import android.util.Log;
+
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
@@ -13,6 +15,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 import ponny.org.monitora.utils.CipherMonitora;
+import ponny.org.monitora.utils.Utils;
 
 import static org.junit.Assert.*;
 
@@ -25,6 +28,7 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
-       
+       String date = Utils.getPrettyDateFromString("2018-11-12T13:50:08.279Z");
+       System.out.print("RESULTADO"+date);
     }
 }

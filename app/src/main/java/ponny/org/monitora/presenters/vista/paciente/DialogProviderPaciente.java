@@ -6,8 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Date;
-
 import ponny.org.monitora.R;
 import ponny.org.monitora.presenters.DialogProvider;
 
@@ -25,8 +23,8 @@ public class DialogProviderPaciente extends DialogProvider {
     public Dialog recogerMuestra() {
         Dialog muestraDialog = super.createDialog(R.layout.dialog_registro_muestra);
         muestraDialog.show();
-        txt_description = muestraDialog.findViewById(R.id.txt_description);
-        TextView txt_date= muestraDialog.findViewById(R.id.txt_date);
+        txt_description = muestraDialog.findViewById(R.id.txt_detail_description);
+        TextView txt_date= muestraDialog.findViewById(R.id.txt_detail_fecha);
         txt_date.setText(getPrettyDateNow());
         save_muestra = muestraDialog.findViewById(R.id.btn_save_description);
         return muestraDialog;
